@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { MessageService } from './message.service';
 
 @Component({
   selector: 'pm-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css']
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent {
 
-  constructor() { }
+  constructor(private messageService: MessageService,
+              private router: Router) { }
 
-  ngOnInit() {
-  }
+    close(): void {
+      this.router.navigate([{ outlets: { popup: null } }]);
+      this.messageService.isDisplayed = false;
+    }
 
 }

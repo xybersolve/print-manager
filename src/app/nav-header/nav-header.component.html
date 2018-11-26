@@ -1,8 +1,39 @@
-<nav class='pa-navbar navbar navbar-expand navbar-fixed-top'>
+<nav class='pa-navbar navbar navbar-expand-lg' >
   <a class='navbar-brand brand-title' [routerLink]="['/home']">{{brandTitle}}</a>
-  <ul class='nav nav-pills' style="margin:0;padding:0;">
-    <li><a class='nav-link' [routerLink]="['/inventory']" routerLinkActive='active'>Inventory</a></li>
-    <li><a class='nav-link' [routerLink]="['/image']" routerLinkActive='active'>Images</a></li>
+  <ul class='nav navbar-nav nav-pills mr-auto' style="margin:0;padding:0;">
+    <li class="nav-item">
+      <a class='nav-link' [routerLink]="['/invoice']" routerLinkActive='active'>Invoice</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class='nav-link navbar-item' [routerLink]="['/inventory']" routerLinkActive='active'>Inventory</a>
+    </li>
+
+    <li class="nav-item">
+      <a class='nav-link' [routerLink]="['/image']" routerLinkActive='active'>Images</a>
+    </li>
+
+    <li class="nav-item">
+      <a class='nav-link' [routerLink]="['/line']" routerLinkActive='active'>Lines</a>
+    </li>
+  
+  </ul>
+  <ul class="nav  nav-pills justify-content-end">
+    <li *ngIf="authService.isLoggedIn()" class="nav-item">
+      <a class="nav-link" [routerLink]="['/login']" >Welcome {{ authService.currentUser.name }}</a>
+    </li>
+    <li *ngIf="!messageService.isDisplayed">
+      <a class="nav-link" (click)='displayMessages()'>Show Messages</a>
+    </li>
+    <li *ngIf="messageService.isDisplayed">
+        <a class="nav-link" (click)='hideMessages()'>Hide Messages</a>
+    </li>
+    <li *ngIf="!authService.isLoggedIn()">
+      <a class="nav-link" [routerLink]="['/login']">Log In</a>
+    </li>
+    <li *ngIf="authService.isLoggedIn()">
+      <a class="nav-link" (click)="logOut()">Log Out</a>
+    </li>
   </ul>
 </nav> 
 

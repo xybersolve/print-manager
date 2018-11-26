@@ -1,0 +1,229 @@
+<!--
+  Responsive Sizing
+  lg:  4  2  6 
+  md:  4  2  6 
+  sm: 12 12 12
+  xs: 12 12 12
+
+
+-->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>Invoice</h3>
+      <!--
+      <div>
+        {{ invoice | json }}
+      </div>
+      -->
+    </div>
+  </div>
+
+  <!-- Lefthand Column -->
+  <!-- Images: Source Images -->
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <!-- Filter Images -->
+      <input type="text" 
+                  class="form-control filter-input" 
+                  style="width:80%;display:inline-block;"
+                  id="image-filter" 
+                  [(ngModel)]='imageFilter'
+                  placeholder='lighthouse' >
+          
+          <button type="button"
+                  class="btn btn-light"  
+                  style='display:inline-block;margin-left:4px;height:25px;width:15%;padding-top:0;margin-top:0;' 
+                  (click)='clearImageFilter()'>
+               
+                <i class="fa fa-times fa-1x"  aria-hidden="true"></i>
+             </button>   
+   
+      <!-- Image List -->       
+      <ul class="list-group source-images"
+          style="margin-top:10px;"   
+          *ngIf='filteredImages && filteredImages.length'>
+        
+        <li class="list-group-item"
+            (click)='onImageSelection(image.name)' 
+            *ngFor='let image of filteredImages; let even = even; let odd = odd;'
+            [ngClass]='{odd:odd, even:even}'>
+          {{image?.name | xsTruncate:25}}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Aspect Ratios -->
+    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" 
+         style="padding:0 8px;">
+
+         <label for="materials">Materials:</label>
+         <!-- [(ngModel)]="selectedAspectRatio" -->  
+         <select class="form-control"
+                 style="margin-bottom: 12px;"
+                 id="materials"
+                 [(ngModel)]='selectedMaterial'
+                 required>
+ 
+              <!-- [ngValue]="ratio.ratio"  -->
+              <option *ngFor='let material of materials'
+                       [ngValue]="material.material">
+             {{material?.material}}
+           </option>  
+         </select>
+ 
+
+        <label for="aspect-ratios">Aspect ratio:</label>
+
+        <!-- [(ngModel)]="selectedAspectRatio" -->  
+        <select class="form-control"
+                style="margin-bottom: 12px;"
+                id="aspect-ratios"
+                [(ngModel)]='ratioFilter'
+                required>
+
+             <!-- [ngValue]="ratio.ratio"  -->
+             <option *ngFor='let ratio of aspectRatios'
+                      [ngValue]="ratio.ratio">
+            {{ratio?.ratio}}
+          </option>  
+        </select>
+        <!-- [{"ratio":"2:3"},{"ratio":"5:7"},{"ratio":"4:5"},{"ratio":"1:1"}]   -->
+
+    <!-- Sizes: Buttons  --> 
+    <!--
+      fa fa-arrow-right
+      fa fa-chevron-right
+    -->
+    <label for="image-size">Image size:</label>
+    <div *ngFor='let size of filteredSizes' id="image-size">
+        
+        <button class="size-button"
+                (click)="onSizeSelection(size.size);">
+
+          {{size.size}} 
+          <i class="fa fa-chevron-right xs-light float-right vcenter" 
+             aria-hidden="true" 
+             style="margin-top:4px;">
+          </i>
+        </button>
+      </div>
+    </div>
+
+    <!-- New Righthand Column -->
+    <!-- Invoice: Invoice Item -->
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+      <div class="card add-item">
+        <div class="card-body">
+           <div class="card-text">
+              <table class="table item-table">
+                <thead>
+                  <tr>
+                    <th colspan="2">
+                      Invoice Item 
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="item-label">Material:</td>
+                    <td>{{selectedMaterial}}</td>
+                  </tr>
+
+                  <tr>
+                    <td class="item-label">Size:</td>
+                    <td>{{itemSize}}</td>
+                  </tr>
+                  <tr>
+                    <td class="item-label">Title:</td>
+                    <td>{{itemName}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button type="button" 
+                      class="btn btn-primary add-button"
+                      [disabled]="! isValidInvoiceItem()"
+                      (click)="onItemAdd()">
+                Add Item to Invoice
+              </button>
+            </div>
+        </div>
+
+        <!-- Invoice -->
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title"><b>Invoice</b></div>
+            <div class="card-text">
+              <div>
+
+                <!-- Location Selector -->
+                <label for="location">Location:</label>
+                <select class="form-control"
+                        style="margin-bottom: 12px;"
+                        id="location"
+                        [(ngModel)]='invoice.location'
+                        required>
+        
+                     <option *ngFor='let location of locations'
+                              [ngValue]="location.location">
+                    {{location?.location}}
+                  </option>  
+                </select>
+              </div>  
+
+              <!-- Invoice: Invoice Item List -->
+              <div>
+                <table class="table table-bordered table-hover table-condensed"
+                       *ngIf='invoice.items && invoice.items.length'>
+                  <tbody>
+                    <tr *ngFor="let item of invoice.items; let even = even; let odd = odd; let idx = index"
+                        [ngClass]="{odd:odd, even:even}">
+    
+                      <td class="right-align">
+                        {{item.size | xsSizeFormat:'short'}}
+                      </td>
+                      <td>
+                        {{item.name | xsTruncate:10}}
+                      </td>
+                      <td>
+                        {{item.material | xsMaterialAcronym}}
+                      </td>
+                      <td (click)="onRemoveItem(idx);"
+                          class="action-item">
+                        <i class="fa fa-times fa-1x" color="red" aria-hidden="true"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>  
+            </div>
+            <div class="invoice-button-holder">
+              <button type="button"
+                      class="btn btn-primary invoice-button"
+                      [disabled]="! isValidInvoice()"
+                      (click)="saveInvoice();">
+                Save      
+              </button>
+              <button type="button"
+                      class="btn btn-secondary invoice-button"
+                      (click)="clearInvoice();">
+                Clear
+              </button>
+
+            </div>
+          </div> <!-- end card-body -->
+        </div> <!-- end card --> 
+      </div>
+    </div> <!-- end col -->
+  </div>
+  <!--
+  <div class="row">
+    <h4>invoice</h4>
+    <div class="col-xs-12">
+      {{ invoice | json }} 
+    </div>
+  </div>
+  -->
+</div>  
+

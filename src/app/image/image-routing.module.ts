@@ -2,12 +2,20 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ImageComponent } from './image.component';
+import { ImageDetailComponent } from './detail/image-detail.component';
 
 const routes: Routes = [
   {
-    path: 'image',
+    path: 'image', // image list
     component: ImageComponent
+  }, {
+    path: 'image/add',  // image add
+    component: ImageDetailComponent
+  }, {
+    path: 'image/:id',  // image edit
+    component: ImageDetailComponent
   }
+
 ];
 
 @NgModule({

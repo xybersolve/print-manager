@@ -1,7 +1,85 @@
 <div class="container">
+  <div class="row-fluid">
+    <div class="col-xs-12">
+      <h3>Images</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12" style="width:100%;">
+      <label>
+         <input [(ngModel)]="activeOnly" type="checkbox" data-toggle="toggle">&nbsp;&nbsp;Active Only
+      </label>
+      
+      <button class="float-right btn btn-outline-primary btn-sm"
+              (click)="onAddImage();">
+      Add Image
+      </button>
+      
+    </div>
+
+    <div class="col-xs-12" style="margin-bottom:10px;">
+      <input type="text" 
+             class="form-control filter-input" 
+             style="width:80%;display:inline-block;"
+             id="image-filter"
+             [(ngModel)]='imageFilter'
+             placeholder='lighthouse' >
+
+      <button type="button"
+            class="btn btn-light"  
+            style='display:inline-block;margin-left:4px;height:25px;width:15%;padding-top:0;margin-top:0;' 
+            (click)='onClearImageFilter()'>
+        
+          <i class="fa fa-times fa-1x"  aria-hidden="true"></i>
+      </button>   
+    </div> 
+  </div>
   <div class="row">
     <div class="col-xs-12">
-      <h2>Image</h2>
+      <!-- 
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      <i class="fa fa-pencil" aria-hidden="true"></i> 
+      <i class="fa fa-pencil-square" aria-hidden="true"></i>
+      <i class="fa fa-trash-o" aria-hidden="true"></i>
+      <i class="fa fa-trash" aria-hidden="true"></i>
+      -->
+      <table class="table table-bordered table-hover table-stripped table-condensed" width="100%" style="width:100%">
+        <thead>
+          <tr>
+            <!-- <th style="min-width:10%;">Id</th> -->
+            <th style="min-width:20%;">Name</th>
+            <th>Line</th>
+            <th>Owner</th>
+            <th>Active</th>
+            <!--<th class="center-align">Edit</th>-->
+            <th class="center-align">
+              Delete
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class=""
+              *ngFor="let image of filteredImages; let odd = odd; let even = even; let idx = index;"
+              [ngClass]="{odd:odd,even:even}">
+
+            <!-- <td (click)="onEditImage(image, idx);" class="right-align">{{image.id}}</td> -->
+            <td (click)="onEditImage(image, idx);">{{image.name}}</td>
+            <td (click)="onEditImage(image, idx);">{{image.line}}</td>
+            <td (click)="onEditImage(image, idx);">{{image.owner}}</td>
+            <td class="center-align centered">
+              <input [(ngModel)]="image.active" 
+                     [ngModelOptions]="{standalone: true}" 
+                     (change)="onChangeActive(image)" 
+                     type="checkbox"  
+                     data-toggle="toggle">
+            </td>
+            <td class="center-align cursor-hand centered"
+                (click)="onRemoveImage(image, idx);">
+              <i class="fa fa-trash xs-light" aria-hidden="true"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

@@ -1,7 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="container">
-  <pm-nav-header></pm-nav-header>
-</div>
 <div>
-  <router-outlet></router-outlet>
+  <pm-nav-header></pm-nav-header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="col-md-2">
+        <router-outlet name="popup"></router-outlet>
+      </div>
+    </div>
+  </div>
+  
 </div>

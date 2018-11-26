@@ -1,0 +1,130 @@
+<!--
+  Template-Driven Form
+-->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>{{title}}</h3>
+    </div>
+  </div>
+  <!--
+    [value]="image?.name"
+    [ngClass]="{'is-invalid': name.touched && !name.valid }"
+  -->
+  <!-- <form (ngSubmit)="onSubmit(imageDetailForm);" #imageDetailForm="ngForm"> -->
+  <form (ngSubmit)="onSubmit(this.image, imageDetailForm);" #imageDetailForm="ngForm">  
+    <div class="row form-group">
+      <div class="col-xs-12">
+        <label for="name">Name:</label>&nbsp;
+        <input class="form-control"
+               type="text" 
+               style="width: 500px;"
+               #name="ngModel" name="name"
+               [(ngModel)]="image.name"
+               placeholder="Image Name" 
+               required
+               maxlength=40
+               minlength=5 #spy />
+          
+          <!-- TODO: Remove: Spy on form element classes -->
+          <!-- <span>{{spy.className}}</span> -->
+
+            <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                  class="alert alert-danger">
+              <div *ngIf="name.errors.required">Image 'name' is required</div>
+              <div *ngIf="name.errors.minlength">Image 'name' must be at least 3 characters in length.</div>
+              <div *ngIf="name.errors.maxlength">Image 'name' can be at lmost 25 characters in lentgth.</div>
+            </div>  
+          
+        <!-- 
+          <div [hidden]="name.valid || name.pristine"
+              class="alert alert-danger">
+            Please enter a valid image name.
+          </div>
+        --> 
+
+        <!-- older error validation technique   
+        <span *ngIf="imageNameVar.errors"
+              class="error-message">
+          Please enter valid image name
+        </span>
+      -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+          <label for="lines">Line:</label>
+          <select class="form-control"
+                  style="margin-bottom: 12px;"
+                  #line="ngModel" name="line"
+                  [(ngModel)]="image.line"
+                  required>
+
+            <option *ngFor='let line of lines'
+                    [value]="line.name">
+              {{line?.name}}
+            </option>  
+
+          </select>
+
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+
+      </div>
+    </div> 
+
+    <div class="row">
+      <div class="col-xs-12">
+        <label for="active">Active:</label>&nbsp;&nbsp;
+        <input [(ngModel)]="image.active"
+               id="active"
+               name="active"
+               type="checkbox"
+               data-toggle="toggle">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <label from="owner">Owner:</label>&nbsp;&nbsp;
+        <input type="text" 
+               name="owner" 
+               id="owner" 
+               class="form-control" 
+               disabled
+               [value]="image?.owner">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button type="submit"
+                style="margin-top:10px;"
+                [disabled]="!imageDetailForm.form.valid && !imageDetailForm.form.dirty"
+                class="btn btn-primary">
+          Save
+        </button>
+      </div>
+    </div>     
+  </form>
+  
+  <!-- TODO: Remove this debug data -->
+  <div [hidden]="!showFormDebug">
+    <br>Dirty: {{ imageDetailForm.dirty }}
+    <br>Touched: {{ imageDetailForm.touched }}
+    <br>Valid: {{ imageDetailForm.valid }}
+    <br>Value: {{ imageDetailForm.value | json }}
+  </div>
+    
+</div>  
+
+
+<!--
+_id : 54039e40d6760205193d917c
+active : false
+fileStub : "flowers-in-the-field"
+id : 57
+line : "Flowers"
+name : "Flowers in the Field"
+owner : "Greg Milligan"
+-->

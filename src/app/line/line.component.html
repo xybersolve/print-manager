@@ -1,0 +1,43 @@
+<div class="container">
+<div class="row">
+  <div class="col-xs-12">
+    <h3>Lines</h3>
+    <!--
+    <div>
+      {{ lines | json }}
+    </div>
+    -->
+    <table class="table table-condensed table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Description
+          </th>
+          <th>
+            Delete
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let line of lines; let idx = index; let odd = odd; let even = even;"
+            [ngClass]='{odd:odd, even:even}'
+            (click)="onEdit(line, idx);">
+          <td>
+            {{line?.name}}
+          </td>
+          <td>
+            {{line?.description}}
+          </td>
+          <td class="center-align cursor-hand centered"
+              (click)="onRemove(line, idx);">
+
+            <i class="fa fa-trash xs-light" aria-hidden="true"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
