@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
@@ -11,21 +11,39 @@ import { CommonService } from './common.service';
   providedIn: 'root'
 })
 export class LineService {
+
   locations: ILine[] = [];
+  baseUrl: string;
 
   constructor(
     private http: HttpClient,
     private common: CommonService
-  ) { }
+  ) {
+    this.baseUrl = `${this.common.baseRestUrl}/lines`;
+   }
 
   getAll(): Observable<ILine[]> {
-    return this.http.get<ILine[]>(`${this.common.baseRestUrl}/lines`);
+    const url = `${this.baseUrl}`;
+    return this.http.get<ILine[]>(url);
   }
 
-  getAllBrief(): Observable<ILineBrief[]> {
-    return this.http.get<ILineBrief[]>(`${this.common.baseRestUrl}/lines/brief`);
+  get(id: any): Observable<ILine> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.get<ILine>(url);
   }
-  // getAllBrief(): Observable<ILineBrief[]> {
-  //   return this.http.get<ILineBrief[]>(`${this.common.baseRestUrl}/locations/brief`);
-  // }
+  getAllBrief(): Observable<ILineBrief[]> {
+    const url = `${this.baseUrl}/brief`;
+    return this.http.get<ILineBrief[]>(url);
+  }
+
+  add(line: ILine): Observable<ILine> {
+    const url = `${this.baseUrl}`;
+    return this.http.post<ILine>(url, line, this.common.headers);
+  }
+
+  update(line: ILine): Observable<any> {
+    const url = `${this.baseUrl}/${line._id}`;
+    console.log('lineService.update');
+    return this.http.put<any>(url, line, this.common.headers);
+  }
 }

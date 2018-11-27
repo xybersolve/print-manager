@@ -30,13 +30,13 @@ export class ImageService {
   options = {};
   images: IImage[] = [];
   selected: IImage[] = [];
+  baseUrl: string;
 
   constructor(
     private http: HttpClient,
     private common: CommonService
   ) {
-    this.headers = new Headers({ 'Content-Type': 'application/json'});
-    // this.options = new RequestOptions({ headers: this.headers });
+    this.baseUrl = `${this.common.baseRestUrl}/images`;
   }
 
   makeFileStubName(name: string) {
@@ -44,38 +44,29 @@ export class ImageService {
   }
 
   getAll(): Observable<IImage[]> {
-    return this.http.get<IImage[]>(`${this.common.baseRestUrl}/images`);
+    const url = `${this.baseUrl}`;
+    return this.http.get<IImage[]>(url);
   }
 
   get(id: number): Observable<IImage> {
-    const url = `${this.common.baseRestUrl}/images/${id}`;
-    // console.log(url);
+    const url = `${this.baseUrl}/${id}`;
     return this.http.get<IImage>(url);
   }
 
   update(image: IImage): Observable<any> {
-    const url = `${this.common.baseRestUrl}/images/${image._id}`;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.put<any>(url, image, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
+    const url = `${this.baseUrl}/${image._id}`;
+    return this.http.put<any>(url, image, this.common.headers);
   }
 
   add(image: IImage): Observable<IImage> {
-    const url = `${this.common.baseRestUrl}/images`;
+    const url = `${this.baseUrl}`;
     image.fileStub = this.makeFileStubName(image.name);
-    return this.http.post<IImage>(url, image, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
+    return this.http.post<IImage>(url, image, this.common.headers);
   }
 
   delete(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.common.baseRestUrl}/images/${id}`);
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.delete<void>(url);
   }
 
   private handleError(error: any) {
