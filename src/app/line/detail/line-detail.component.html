@@ -1,3 +1,115 @@
-<p>
-  line-detail works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>{{title}}</h3>
+    </div>
+  </div>
+  
+  <form (ngSubmit)="onSubmit(this.line);"
+        [formGroup]="lineForm">
+
+    <div class="row">
+      <div class="col-xs-12">
+      
+      <label for="name">Name</label>
+      <input id="name" 
+             class="form-control" 
+             type="text"
+             minlength="3"
+             maxlength="50"
+             required
+             placeholder="Line Name" 
+             formControlName="name" />
+
+        <div *ngIf="lineForm.get('name').invalid && (lineForm.get('name').dirty || lineForm.get('name').touched)"
+             class="alert alert-danger">
+         <div *ngIf="lineForm.get('name').errors.required">Line 'name' is required</div>
+         <div *ngIf="lineForm.get('name').errors.minlength">Line 'name' must be at least 3 characters in length.</div>
+         <div *ngIf="lineForm.get('name').errors.maxlength">Line 'name' can be at most 50 characters in length.</div>
+       </div>      
+      </div>
+    </div>  
+
+    <div class="row">
+      <div class="col-xs-12">
+      
+      <label for="description">Description</label>
+      <input id="description" 
+             class="form-control" 
+             style="width:400px;"
+             type="text"
+             placeholder="Line description." 
+             formControlName="description" />
+        
+        <div *ngIf="lineForm.get('description').invalid && (lineForm.get('description').dirty || lineForm.get('description').touched)"
+             class="alert alert-danger">
+         <div *ngIf="lineForm.get('description').errors.required">Line 'description' is required</div>
+         <div *ngIf="lineForm.get('description').errors.minlength">Line 'description' must be at least 5 characters in length.</div>
+         <div *ngIf="lineForm.get('description').errors.maxlength">Line 'description' can be at most 255 characters in length.</div>
+       </div> 
+      </div>
+    </div>  
+
+    <div class="row">
+      <div class="col-xs-12">
+        <label for="sortOrder">Sort Order:</label>&nbsp;&nbsp;
+        <input type="number"
+               step="10" 
+               class="form-control" 
+               name="sortOrder" 
+               id="sortOrder" 
+               placeholder="25"
+               formControlName="sortOrder">
+          <div *ngIf="lineForm.get('sortOrder').invalid && (lineForm.get('sortOrder').dirty || lineForm.get('sortOrder').touched)"
+               class="alert alert-danger">
+           <div *ngIf="lineForm.get('sortOrder').errors.required">Line 'sortOrder' is required</div>
+           <div *ngIf="lineForm.get('sortOrder').errors.pattern">Line 'sortOrder' must be a a number.</div>
+           
+         </div>       
+      </div>
+    </div>
+    
+    <div class="row" style="margin-top:10px;">
+      <div class="col-xs-12">
+        <label for="active">Active:</label>&nbsp;&nbsp;
+        <input id="active"
+               name="active"
+               type="checkbox"
+               formControlName="active"
+               data-toggle="toggle">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <label for="owner">Owner:</label>&nbsp;&nbsp;
+        <input type="text" 
+               class="form-control" 
+               name="owner" 
+               id="owner" 
+               formControlName="owner">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <button type="submit"
+                style="margin-top:10px;"
+                [disabled]="!lineForm.valid"
+                class="btn btn-primary">
+          Save
+        </button>
+      </div>
+    </div> 
+  </form>
+  
+  <!-- TODO: Remove this debug data -->
+  <div [hidden]="!showFormDebug">
+      <br>Dirty: {{ lineForm.dirty }}
+      <br>Touched: {{ lineForm.touched }}
+      <br>Valid: {{ lineForm.valid }}
+      <br>Value: {{ lineForm.value | json }}
+    </div>
+
+</div>
+

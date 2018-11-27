@@ -2,6 +2,14 @@
 <div class="row">
   <div class="col-xs-12">
     <h3>Lines</h3>
+    <label>
+        <input [(ngModel)]="activeOnly" type="checkbox" data-toggle="toggle">&nbsp;&nbsp;Active Only
+     </label>
+
+    <button class="float-right btn btn-outline-primary btn-sm"
+            (click)="onAdd();">
+      Add Line
+    </button>
     <!--
     <div>
       {{ lines | json }}
@@ -17,20 +25,42 @@
             Description
           </th>
           <th>
+            Sort Order
+          </th>
+          <th>
+            Active
+          </th>
+          <th>
             Delete
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let line of lines; let idx = index; let odd = odd; let even = even;"
-            [ngClass]='{odd:odd, even:even}'
-            (click)="onEdit(line, idx);">
-          <td>
+        <tr *ngFor="let line of filteredLines; let idx = index; let odd = odd; let even = even;"
+            [ngClass]='{odd:odd, even:even}'>
+          
+          <td class="cursor-hand"
+              (click)="onEdit(line, idx);">
             {{line?.name}}
           </td>
-          <td>
+          
+          <td class="cursor-hand"
+              (click)="onEdit(line, idx);">
             {{line?.description}}
           </td>
+          
+          <td class="right-align cursor-hand">
+            {{line?.sortOrder}}
+          </td>
+
+          <td class="center-align centered">
+            <input [(ngModel)]="line.active" 
+                   [ngModelOptions]="{standalone: true}" 
+                   (change)="onChangeActive(line)" 
+                   type="checkbox"  
+                   data-toggle="toggle">
+          </td>
+
           <td class="center-align cursor-hand centered"
               (click)="onRemove(line, idx);">
 
