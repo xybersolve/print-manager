@@ -1,17 +1,21 @@
 export class ILocation {
-  _id: number;
+  _id?: number;
+  name: string;
   commission: number;
   useCommision: boolean;
-  location: string;
+  location?: string; // deprecated
   owner: string;
   sortOrder: number;
-  address: string;
-  state: string;
-  postalCode: string;
+  useAddress: boolean;
+  address?: string;
+  state?: string;
+  postalCode?: string;
   email: string;
+  notifyEmail: boolean;
   firstName: string;
   lastName: string;
   phone: string;
+  notifyPhone: boolean;
   active: boolean;
 }
 

@@ -2,11 +2,11 @@
   <a class='navbar-brand brand-title' [routerLink]="['/home']">{{brandTitle}}</a>
   <ul class='nav navbar-nav nav-pills mr-auto' style="margin:0;padding:0;">
     <li class="nav-item">
-      <a class='nav-link' [routerLink]="['/invoice']" routerLinkActive='active'>Invoice</a>
+      <a class='nav-link navbar-item' [routerLink]="['/inventory']" routerLinkActive='active'>Inventory</a>
     </li>
     
     <li class="nav-item">
-      <a class='nav-link navbar-item' [routerLink]="['/inventory']" routerLinkActive='active'>Inventory</a>
+      <a class='nav-link' [routerLink]="['/invoice']" routerLinkActive='active'>Invoice</a>
     </li>
 
     <li class="nav-item">
@@ -15,6 +15,10 @@
 
     <li class="nav-item">
       <a class='nav-link' [routerLink]="['/line']" routerLinkActive='active'>Lines</a>
+    </li>
+
+    <li class="nav-item">
+      <a class='nav-link' [routerLink]="['/location']" routerLinkActive='active'>Locations</a>
     </li>
   
   </ul>

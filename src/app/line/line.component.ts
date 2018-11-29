@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { LineService } from '../shared/services/line.service';
 import { ILine } from '../shared/models/line.model';

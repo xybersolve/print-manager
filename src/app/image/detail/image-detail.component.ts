@@ -19,7 +19,7 @@ export class ImageDetailComponent implements OnInit {
   showFormDebug = true;
   title = 'Image';
   _id: any;
-  image: IImage | undefined = new IImage();
+  image = new IImage();
   lines: ILineBrief[] = [];
 
   constructor(private router: Router,
@@ -30,11 +30,9 @@ export class ImageDetailComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
+    this.title = id ? 'Image Edit' : 'Image Add';
     if (id) {
-      this.title = 'Image Edit';
       this.getImage(id);
-    } else {
-      this.title = 'Image Add';
     }
     this.getLines();
   }

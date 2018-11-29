@@ -11,17 +11,26 @@ import { CommonService } from './common.service';
   providedIn: 'root'
 })
 export class InvoiceService {
-
+  baseUrl: string;
   constructor(
     private http: HttpClient,
-    private commonService: CommonService
-  ) { }
+    private common: CommonService
+  ) {
+    this.baseUrl = `${this.common.baseRestUrl}/invoice`;
+  }
 
-  get() {
-    return this.http.get<IInvoice[]>(`${this.commonService.baseRestUrl}/invoice`);
+  getAll() {
+    const url = `${this.baseUrl}/`;
+    return this.http.get<IInvoice[]>(url);
+  }
+
+  get(id: any) {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.get<IInvoice>(url);
   }
 
   save(invoice: IInvoice): Observable<IInvoice> {
-    return this.http.post<IInvoice>(`${this.commonService.baseRestUrl}/invoice`, {invoice: IInvoice});
+    const url = `${this.baseUrl}/`;
+    return this.http.post<IInvoice>(url, {invoice: IInvoice});
   }
 }

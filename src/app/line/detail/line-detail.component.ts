@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { CommonService } from '../../shared/services/common.service';
 import { ILine } from '../../shared/models/line.model';
 import { LineService } from '../../shared/services/line.service';
 
@@ -21,7 +22,8 @@ export class LineDetailComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private fb: FormBuilder,
-              private lineService: LineService
+              private lineService: LineService,
+              private common: CommonService
   ) { }
 
   ngOnInit() {
@@ -35,7 +37,7 @@ export class LineDetailComponent implements OnInit {
     this.lineForm = this.fb.group({
       name: [this.line.name, [ Validators.required, Validators.minLength(3), Validators.maxLength(50) ]],
       description: [this.line.description, [ Validators.required, Validators.minLength(5), Validators.maxLength(255) ]],
-      owner: {value: this.line.owner || 'Greg Milligan', disabled: true},
+      owner: {value: this.line.owner || this.common.owner, disabled: true},
       active: this.line.active,
       sortOrder: [this.line.sortOrder, [Validators.required, Validators.pattern(/\d{1,4}/) ]]
     });
@@ -55,12 +57,12 @@ export class LineDetailComponent implements OnInit {
   private setValues() {
     console.log('setValues()');
     console.dir(this.line);
-    this.line.active = true;
+    // this.location.active = true;
     // must set all form values here
     this.lineForm.setValue({
       name: this.line.name,
       description: this.line.description,
-      owner: this.line.owner,
+      owner: this.line.owner || this.common.owner,
       active: this.line.active,
       sortOrder: this.line.sortOrder
     });

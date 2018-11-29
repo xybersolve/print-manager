@@ -1,10 +1,9 @@
 export class ILine {
-  _id: number;
+  _id?: number;
   description: string;
-  id: number;
   name: string;
-  owner: string;
-  ownerId: number;
+  owner: 'Greg Milligan';
+  active: true;
   sortOrder: number;
 }
 

@@ -33,7 +33,7 @@
                   class="alert alert-danger">
               <div *ngIf="name.errors.required">Image 'name' is required</div>
               <div *ngIf="name.errors.minlength">Image 'name' must be at least 3 characters in length.</div>
-              <div *ngIf="name.errors.maxlength">Image 'name' can be at lmost 25 characters in lentgth.</div>
+              <div *ngIf="name.errors.maxlength">Image 'name' can be at most 40 characters in length.</div>
             </div>  
           
         <!-- 
@@ -69,11 +69,6 @@
 
         </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12">
-
-      </div>
-    </div> 
 
     <div class="row">
       <div class="col-xs-12">

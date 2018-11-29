@@ -1,0 +1,163 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>{{title}}</h3>
+      </div>
+    </div>
+
+    <form (ngSubmit)="onSubmit(this.location);"
+          [formGroup]="locationForm">
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">    
+      
+          <label for="name">Name</label>
+          <input id="name"
+                 class="form-control" 
+                 style="width:400px;"
+                 type="text"
+                 placeholder="Location Name" 
+                 formControlName="name" />
+    
+            <div *ngIf="locationForm.get('name').invalid && (locationForm.get('name').dirty || locationForm.get('name').touched)"
+                class="alert alert-danger">
+            <div *ngIf="locationForm.get('name').errors.required">Location 'name' is required</div>
+            <div *ngIf="locationForm.get('name').errors.minlength">Location 'name' must be at least 3 characters in length.</div>
+            <div *ngIf="locationForm.get('name').errors.maxlength">Location 'name' can be at most 50 characters in length.</div>
+          </div>      
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email"
+                   class="form-control" 
+                   style="width:400px;"
+                   type="email"
+                   placeholder="Email" 
+                   [ngClass]="{ 'is-invalid': emailMessage }"
+                   formControlName="email" />
+      
+              <div *ngIf="emailMessage"
+                   class="alert alert-danger">
+                  {{ emailMessage }}
+              </div> 
+            
+            <label for="notifyEmail" class="margin-top:20px;">Notify via Email:</label>&nbsp;&nbsp;
+            <input id="notifyEmail"
+                  name="notifyEmail"
+                  type="checkbox"
+                  formControlName="notifyEmail"
+                  data-toggle="toggle">
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone"
+                  class="form-control" 
+                  style="width:400px;"
+                  type="tel"
+                  placeholder="Location Name" 
+                  formControlName="phone" />
+      
+              <div *ngIf="locationForm.get('phone').invalid && (locationForm.get('phone').dirty || locationForm.get('phone').touched)"
+                  class="alert alert-danger">
+              <div *ngIf="locationForm.get('phone').errors.required">Location 'phone' is required</div>
+              <div *ngIf="locationForm.get('phone').errors.minlength">Location 'phone' must be at least 9 characters in length.</div>
+              <div *ngIf="locationForm.get('phone').errors.maxlength">Location 'phone' can be at most 15 characters in length.</div>
+            </div> 
+
+            <label for="notifyPhone" class="">Notify via Phone:</label>&nbsp;&nbsp;
+              <input id="notifyPhone"
+                     name="notifyPhone"
+                     type="checkbox"
+                     formControlName="notifyPhone"
+                     data-toggle="toggle">
+          </div>
+
+          <label for="commission">Commission (%):</label>
+            <input type="number"
+                      step="5" 
+                      class="form-control" 
+                      style="width:80px;"
+                      name="commission" 
+                      id="commission" 
+                      max="99" min="0"
+                      placeholder="25"
+                      formControlName="commission">
+                <div *ngIf="locationForm.get('commission').invalid && (locationForm.get('commission').dirty || locationForm.get('commission').touched)"
+                      class="alert alert-danger">
+                  <div *ngIf="locationForm.get('commission').errors.required">Location 'commission' is required</div>
+                  <div *ngIf="locationForm.get('commission').errors.pattern">Location 'commission' must be a number.</div>
+                  <div *ngIf="locationForm.get('commission').errors.range">Location 'commission' must be in range 1 to 99.</div>
+                </div>       
+  
+            <label for="sortOrder">Sort Order:</label>
+            <input type="number"
+                  step="10" 
+                  class="form-control" 
+                  style="width:80px;"
+                  name="sortOrder" 
+                  id="sortOrder" 
+                  placeholder="25"
+                  formControlName="sortOrder">
+              
+              <div *ngIf="locationForm.get('sortOrder').invalid && (locationForm.get('sortOrder').dirty || locationForm.get('sortOrder').touched)"
+                  class="alert alert-danger">
+              <div *ngIf="locationForm.get('sortOrder').errors.required">Location 'sortOrder' is required</div>
+              <div *ngIf="locationForm.get('sortOrder').errors.pattern">Location 'sortOrder' must be a a number.</div>
+              
+            </div>       
+
+            
+            <label for="active" class="margin-top:20px;">Active:</label>&nbsp;&nbsp;
+            <input id="active"
+                  name="active"
+                  type="checkbox"
+                  formControlName="active"
+                  data-toggle="toggle">
+            <br />
+
+            <label for="owner">Owner:</label>&nbsp;&nbsp;
+            <input type="text" 
+                  class="form-control" 
+                  style="width:250px;"
+                  name="owner" 
+                  id="owner" 
+                  formControlName="owner">
+      </div>      
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <label>Use Address:</label>&nbsp;&nbsp;
+        <input type="checkbox" 
+               id="useAddress" 
+               name="useAddress">
+      </div>
+    
+  </div>
+  <div class="row" style="margin-top:20px;">
+    <div class="col-xs-12">
+        <button type="submit"
+        style="margin-top:10px;"
+        [disabled]="!locationForm.valid"
+        class="btn btn-primary submit-button">
+      Save Location
+    </button>
+
+    </div>
+  </div>
+  </form>
+
+  <div class="row">
+        <!-- TODO: Remove this debug data -->
+    <div class="col-xs-12" [hidden]="!showFormDebug">
+            <br>Dirty: {{ locationForm.dirty }}
+            <br>Touched: {{ locationForm.touched }}
+            <br>Valid: {{ locationForm.valid }}
+            <br>Value: {{ locationForm.value | json }}
+    </div>
+      
+  </div>
+
+</div> 
+
+
+  

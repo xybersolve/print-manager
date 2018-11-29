@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 
-// import { ImageComponent } from './image/image/image.component';
-// import { InventoryComponent } from './inventory/inventory.component';
-// import { LoginComponent } from './user/login.component';
+// Material
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,38 +20,39 @@ import { InventoryModule } from './inventory/inventory.module';
 import { ImageModule } from './image/image.module';
 import { UserModule } from './user/user.module';
 import { LineModule } from './line/line.module';
+import { LocationModule } from './location/location.module';
 
 // feature components
 import { MessageComponent } from './message/message.component';
 import { InventoryListComponent } from './inventory/list/inventory-list.component';
-import { InvoiceComponent } from './invoice/invoice.component';
-import { LineComponent } from './line/line.component';
-import { LineDetailComponent } from './line/detail/line-detail.component';
-
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavHeaderComponent,
+    SidebarComponent,
     WelcomeComponent,
     PageNotFoundComponent,
     MessageComponent,
-    InventoryListComponent,
-    InvoiceComponent,
-    LineComponent,
-    LineDetailComponent
+    InventoryListComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
     HttpClientModule,
     InvoiceModule,
     InventoryModule,
     ImageModule,
     LineModule,
+    LocationModule,
     UserModule,
     AppRoutingModule,
   ],
+  exports: [ ],
   providers: [],
   bootstrap: [AppComponent]
 })

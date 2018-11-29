@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ImageService } from '../shared/services/image.service';
 
 import { IImage } from '../shared/models/image.model';
-import { subscribeOn } from '../../../node_modules/rxjs/operators';
 
 @Component({
   // selector: 'pm-image',
@@ -12,7 +11,6 @@ import { subscribeOn } from '../../../node_modules/rxjs/operators';
   styleUrls: ['./image.component.css']
 })
 export class ImageComponent implements OnInit {
-
   images: IImage[] = [];
   filteredImages: IImage[] = [];
   _activeOnly = false;

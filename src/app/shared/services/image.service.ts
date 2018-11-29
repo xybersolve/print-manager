@@ -39,32 +39,32 @@ export class ImageService {
     this.baseUrl = `${this.common.baseRestUrl}/images`;
   }
 
-  makeFileStubName(name: string) {
+  private makeFileStubName(name: string) {
     return name.replace(/\s/g, '-').toLocaleLowerCase();
   }
 
-  getAll(): Observable<IImage[]> {
+  public getAll(): Observable<IImage[]> {
     const url = `${this.baseUrl}`;
     return this.http.get<IImage[]>(url);
   }
 
-  get(id: number): Observable<IImage> {
+  public get(id: number): Observable<IImage> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.get<IImage>(url);
   }
 
-  update(image: IImage): Observable<any> {
+  public update(image: IImage): Observable<any> {
     const url = `${this.baseUrl}/${image._id}`;
     return this.http.put<any>(url, image, this.common.headers);
   }
 
-  add(image: IImage): Observable<IImage> {
+  public add(image: IImage): Observable<IImage> {
     const url = `${this.baseUrl}`;
     image.fileStub = this.makeFileStubName(image.name);
     return this.http.post<IImage>(url, image, this.common.headers);
   }
 
-  delete(id: string): Observable<void> {
+  public delete(id: string): Observable<void> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.delete<void>(url);
   }

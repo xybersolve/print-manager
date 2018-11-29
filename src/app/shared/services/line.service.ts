@@ -22,26 +22,27 @@ export class LineService {
     this.baseUrl = `${this.common.baseRestUrl}/lines`;
    }
 
-  getAll(): Observable<ILine[]> {
+  public getAll(): Observable<ILine[]> {
     const url = `${this.baseUrl}`;
     return this.http.get<ILine[]>(url);
   }
 
-  get(id: any): Observable<ILine> {
+  public get(id: any): Observable<ILine> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.get<ILine>(url);
   }
-  getAllBrief(): Observable<ILineBrief[]> {
+
+  public getAllBrief(): Observable<ILineBrief[]> {
     const url = `${this.baseUrl}/brief`;
     return this.http.get<ILineBrief[]>(url);
   }
 
-  add(line: ILine): Observable<ILine> {
+  public add(line: ILine): Observable<ILine> {
     const url = `${this.baseUrl}`;
     return this.http.post<ILine>(url, line, this.common.headers);
   }
 
-  update(line: ILine): Observable<any> {
+  public update(line: ILine): Observable<any> {
     const url = `${this.baseUrl}/${line._id}`;
     console.log('lineService.update');
     return this.http.put<any>(url, line, this.common.headers);
