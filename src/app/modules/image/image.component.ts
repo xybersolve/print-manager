@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ImageService } from '../shared/services/image.service';
+import { ImageService } from '../../core/http/image.service';
 
-import { IImage } from '../shared/models/image.model';
+import { IImage } from '../../core/models/image.model';
 
 @Component({
   // selector: 'pm-image',

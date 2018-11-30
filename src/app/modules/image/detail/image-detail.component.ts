@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import { ImageService } from '../../shared/services/image.service';
-import { LineService } from '../../shared/services/line.service';
+import { ImageService } from '../../../core/http/image.service';
+import { LineService } from '../../../core/http/line.service';
 
-import { IImage } from '../../shared/models/image.model';
-import { ILine, ILineBrief } from '../../shared/models/line.model';
+import { IImage } from '../../../core/models/image.model';
+import { ILine, ILineBrief } from '../../../core/models/line.model';
 
 
 @Component({

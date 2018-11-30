@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // import { InventoryComponent } from './inventory/inventory.component';
-import { ImageComponent } from './image/image.component';
+// import { ImageComponent } from './modules/image/image.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { LoginComponent } from './user/login.component';
+// import { LoginComponent } from './modules/user/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
-import { InventoryModule } from './inventory/inventory.module';
+// import { InventoryModule } from './modules/inventory/inventory.module';
 
 const routes: Routes = [
   {
@@ -32,8 +31,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [ // fires up router service here (only)
-    RouterModule.forRoot(routes),
-    InventoryModule
+    RouterModule.forRoot(routes)
   ],
   exports: [
     RouterModule

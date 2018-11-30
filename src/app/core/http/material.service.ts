@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { IMaterial } from '../models/material.model';
-import { CommonService } from './common.service';
+import { CommonService } from '../services/common.service';
 
 @Injectable({
   providedIn: 'root'

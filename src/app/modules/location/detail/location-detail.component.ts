@@ -3,10 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 
-import { CommonService } from '../../shared/services/common.service';
-import { ILocation } from '../../shared/models/location.model';
-import { LocationService } from '../../shared/services/location.service';
-import { ErrorMessanger } from '../../shared/services/error-messanger';
+import { CommonService } from '../../../core/services/common.service';
+import { LocationService } from '../../../core/http/location.service';
+import { ILocation } from '../../../core/models/location.model';
+import { ErrorMessanger } from '../../../core/services/error-messanger';
 
 // custom validation rule - placeholder for future usage
 // return null if valid, {key:value} pair - if not valid

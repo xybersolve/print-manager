@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { ImageService } from '../shared/services/image.service';
-import { SizeService } from '../shared/services/size.service';
-import { MaterialService } from '../shared/services/material.service';
-import { LocationService } from '../shared/services/location.service';
-import { InvoiceService } from '../shared/services/invoice.service';
+import { ImageService } from '../../core/http/image.service';
+import { SizeService } from '../../core/http/size.service';
+import { MaterialService } from '../../core/http/material.service';
+import { LocationService } from '../../core/http/location.service';
+import { InvoiceService } from '../../core/http/invoice.service';
 
-import { IImage } from '../shared/models/image.model';
-import { ISize, IAspectRatio } from '../shared/models/size.model';
-import { IMaterial } from '../shared/models/material.model';
-import { ILocation, ILocationBrief } from '../shared/models/location.model';
-import { IInvoice, IInvoiceItem } from '../shared/models/invoice.model';
+import { IImage } from '../../core/models/image.model';
+import { ISize, IAspectRatio } from '../../core/models/size.model';
+import { IMaterial } from '../../core/models/material.model';
+import { ILocation, ILocationBrief } from '../../core/models/location.model';
+import { IInvoice, IInvoiceItem } from '../../core/models/invoice.model';
 
 // import { TruncatePipe } from '../shared/pipes/truncate.pipe';
 // import { IInvoice, IInvoiceItem } from '../shared/models/invoice.model';

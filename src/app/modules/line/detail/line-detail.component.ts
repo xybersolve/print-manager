@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { CommonService } from '../../shared/services/common.service';
-import { ILine } from '../../shared/models/line.model';
-import { LineService } from '../../shared/services/line.service';
+import { CommonService } from '../../../core/services/common.service';
+import { ILine } from '../../../core/models/line.model';
+import { LineService } from '../../../core/http/line.service';
 
 @Component({
   // selector: 'pm-line-detail',

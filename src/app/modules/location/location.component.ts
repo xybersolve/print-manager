@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ILocation } from '../shared/models/location.model';
-
-import { LocationService } from '../shared/services/location.service';
+import { LocationService } from '../../core/http/location.service';
+import { ILocation } from '../../core/models/location.model';
 
 @Component({
   // selector: 'pm-location',
@@ -34,6 +33,10 @@ export class LocationComponent implements OnInit {
       },
       err => console.error(err)
     );
+  }
+
+  public onAdd() {
+    this.router.navigate(['location', 'add']);
   }
 
   public onRemove(location: ILocation, idx: number) {

@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { ILocation, ILocationBrief } from '../models/location.model';
-import { CommonService } from './common.service';
+import { CommonService } from '../services/common.service';
 
 @Injectable({
   providedIn: 'root'

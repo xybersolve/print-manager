@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import { CommonService } from './common.service';
+import { CommonService } from '../services/common.service';
 import { ISize, IAspectRatio } from '../models/size.model';
 
 

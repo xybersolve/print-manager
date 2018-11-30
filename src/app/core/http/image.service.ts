@@ -20,7 +20,7 @@ import 'rxjs/add/operator/switchMap';
 */
 
 import { IImage } from '../models/image.model';
-import { CommonService } from './common.service';
+import { CommonService } from '../services/common.service';
 
 @Injectable({
   providedIn: 'root'

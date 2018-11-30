@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 // Material
+/*
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav'; */
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,34 +16,33 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 // feature modules
-import { InvoiceModule } from './invoice/invoice.module';
-import { InventoryModule } from './inventory/inventory.module';
-import { ImageModule } from './image/image.module';
-import { UserModule } from './user/user.module';
-import { LineModule } from './line/line.module';
-import { LocationModule } from './location/location.module';
+import { InvoiceModule } from './modules/invoice/invoice.module';
+import { InventoryModule } from './modules/inventory/inventory.module';
+import { ImageModule } from './modules/image/image.module';
+import { UserModule } from './modules/user/user.module';
+import { LineModule } from './modules/line/line.module';
+import { LocationModule } from './modules/location/location.module';
 
 // feature components
-import { MessageComponent } from './message/message.component';
-import { InventoryListComponent } from './inventory/list/inventory-list.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { MessageComponent } from './modules/message/message.component';
+// import { InventoryListComponent } from './inventory/list/inventory-list.component';
+// import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavHeaderComponent,
-    SidebarComponent,
+    // SidebarComponent,
     WelcomeComponent,
     PageNotFoundComponent,
-    MessageComponent,
-    InventoryListComponent
+    MessageComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
+    // BrowserAnimationsModule,
+    // MatButtonModule,
+    // MatIconModule,
+    // MatSidenavModule,
     HttpClientModule,
     InvoiceModule,
     InventoryModule,
