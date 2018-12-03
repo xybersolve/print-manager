@@ -28,6 +28,9 @@ import { LocationModule } from './modules/location/location.module';
 
 // feature components
 import { MessageComponent } from './modules/message/message.component';
+import { SizesComponent } from './modules/sizes/sizes.component';
+import { SizeComponent } from './modules/size/size.component';
+import { MaterialComponent } from './modules/material/material.component';
 // import { InvoiceComponent } from './modules/invoice/invoice.component';
 // import { InventoryListComponent } from './inventory/list/inventory-list.component';
 // import { SidebarComponent } from './sidebar/sidebar.component';
@@ -40,7 +43,10 @@ import { MessageComponent } from './modules/message/message.component';
     // SidebarComponent,
     WelcomeComponent,
     PageNotFoundComponent,
-    MessageComponent
+    MessageComponent,
+    SizesComponent,
+    SizeComponent,
+    MaterialComponent
   ],
   imports: [
     BrowserModule,

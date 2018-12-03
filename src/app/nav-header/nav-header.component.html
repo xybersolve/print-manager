@@ -15,7 +15,7 @@
         <div class="btn-group" dropdown>
           <button id="button-config" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
                   aria-controls="dropdown-config">
-                Attrbutes <span class="caret"></span>
+                Attributes <span class="caret"></span>
           </button>
           <ul id="dropdown-config" 
               *dropdownMenu class="dropdown-menu"
@@ -26,6 +26,12 @@
             </li>
             <li role="menuitem">
               <a class="dropdown-item" href="#" class='nav-link' [routerLink]="['/line']" routerLinkActive='active'>Lines</a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="#" class='nav-link' [routerLink]="['/material']" routerLinkActive='active'>Materials</a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="#" class='nav-link' [routerLink]="['/size']" routerLinkActive='active'>Sizes</a>
             </li>
           </ul>
         </div>

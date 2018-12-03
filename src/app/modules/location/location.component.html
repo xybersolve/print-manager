@@ -34,6 +34,7 @@
               <th style="min-width:20%;">Name</th>
               <th>Owner</th>
               <th>Commission</th>
+              <th>Default</th>
               <th>Active</th>
               <!--<th class="center-align">Edit</th>-->
               <th class="center-align">
@@ -50,6 +51,18 @@
               <td (click)="onEdit(location, idx);">{{location.name}}</td>
               <td (click)="onEdit(location, idx);">{{location.owner}}</td>
               <td (click)="onEdit(location, idx);">{{location.commission}}</td>
+              <td class="text-center">
+                <div *ngIf="location.default === undefined || location.default === false">
+                  <button class="btn btn-sm btn-outline-secondary"
+                          (click)="onSetDefault(location, idx);">
+                    Make Default
+                  </button>
+                </div>
+                <div *ngIf="location.default === true" 
+                      class="is-selected">
+                  <i class="fa fa-check"></i> Default
+                </div>
+              </td>
               <td class="center-align centered">
                 <input [(ngModel)]="location.active" 
                        [ngModelOptions]="{standalone: true}" 
@@ -67,8 +80,3 @@
       </div>
   </div>
 </div>    
-        <!--
-        <div>
-          {{ lines | json }}
-        </div>
-        -->

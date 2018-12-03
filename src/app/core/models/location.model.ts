@@ -17,6 +17,7 @@ export class ILocation {
   phone: string;
   notifyPhone: boolean;
   active: boolean;
+  default?: boolean;
 }
 
 export class ILocationBrief {
@@ -25,4 +26,5 @@ export class ILocationBrief {
   email: string;
   commision: number;
   owner: string;
+  default?: boolean;
 }

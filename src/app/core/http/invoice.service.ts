@@ -6,6 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 
 import { IInvoice } from '../models/invoice.model';
 import { CommonService } from '../services/common.service';
+import { ConfigurationService } from '../../configs/configuration.service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +36,6 @@ export class InvoiceService {
   }
 
   add(invoice: IInvoice): Observable<IInvoice> {
-    console.log('invoiceService.add()');
-    console.dir(invoice);
     const url = `${this.baseUrl}`;
     return this.http.post<IInvoice>(url, invoice, this.common.headers);
   }

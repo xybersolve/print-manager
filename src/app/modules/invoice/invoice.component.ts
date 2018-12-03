@@ -99,16 +99,16 @@ export class InvoiceComponent implements OnInit {
       );
   }
 
-  // External Event Responders
-  public onAdd() {
+  // External Event Consumers
+  onAdd() {
     this.router.navigate(['/invoice', 'add']);
   }
 
-  public onEdit(invoice: IInvoice) {
+  onEdit(invoice: IInvoice) {
     this.router.navigate(['/invoice', invoice._id]);
   }
 
-  public onRemove(invoice, idx) {
+  onRemove(invoice, idx) {
     console.log(`remove invoice: ${idx}`);
     console.dir(invoice);
     this.invoiceService.delete(invoice._id)

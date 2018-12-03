@@ -93,3 +93,8 @@ h2 {
 .bg-lightgrey {
   background-color: #eee;
 }
+
+.is-selected {
+  color: green;
+  font-weight: bold;
+}

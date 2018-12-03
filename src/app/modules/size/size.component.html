@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-6">
+        <h3>Locations</h3>
+      </div>
+    </div>  
+    <!--
+    <div class="row">
+      <div class="col-md-6">
+        <label>
+          <input [(ngModel)]="activeOnly" type="checkbox" data-toggle="toggle">&nbsp;&nbsp;Active Only
+        </label>
+      </div>  
+  
+      <div class="col-md-6">
+        <button class="float-right btn btn-warning btn-sm"
+                (click)="onAdd();">
+          Add Location
+        </button>
+      </div>  
+    </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table table-bordered table-hover table-stripped table-condensed" width="100%" style="width:100%">
+            <thead>
+              <tr>
+                <th style="min-width:20%;">Name</th>
+                <th>Owner</th>
+                <th>Commission</th>
+                <th>Default</th>
+                <th>Active</th>
+                <th class="center-align">
+                  Delete
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class=""
+                  *ngFor="let location of filteredLocations; let odd = odd; let even = even; let idx = index;"
+                  [ngClass]="{odd:odd,even:even}">
+          
+                <td (click)="onEdit(location, idx);">{{location.name}}</td>
+                <td (click)="onEdit(location, idx);">{{location.owner}}</td>
+                <td (click)="onEdit(location, idx);">{{location.commission}}</td>
+                <td class="text-center">
+                  <div *ngIf="location.default === undefined || location.default === false">
+                    <button class="btn btn-sm btn-outline-secondary"
+                            (click)="onSetDefault(location, idx);">
+                      Make Default
+                    </button>
+                  </div>
+                  <div *ngIf="location.default === true" 
+                        class="is-selected">
+                    <i class="fa fa-check"></i> Default
+                  </div>
+                </td>
+                <td class="center-align centered">
+                  <input [(ngModel)]="location.active" 
+                         [ngModelOptions]="{standalone: true}" 
+                         (change)="onChangeActive(location)" 
+                         type="checkbox"  
+                         data-toggle="toggle">
+                </td>
+                <td class="center-align cursor-hand centered"
+                    (click)="onRemove(location, idx);">
+                    <i class="fa fa-times" style="color:red;" aria-hidden="true"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  -->
+  </div>    
+  

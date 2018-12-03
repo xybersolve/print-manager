@@ -35,15 +35,48 @@ export class LocationComponent implements OnInit {
     );
   }
 
-  public onAdd() {
+  private updateLocation(location: ILocation) {
+    console.log('updateLocation');
+    this.locationService.update(location)
+    .subscribe(
+      (data) => console.log(data),
+      (err) => console.error(err)
+    );
+  }
+
+  private setDefault(location: ILocation) {
+    this.locationService.setDefault(location)
+    .subscribe(
+      (data) => console.log(data),
+      (err) => console.error(err)
+    );
+  }
+
+  private deleteLocation(location: ILocation) {
+    this.locationService.delete(location._id)
+    .subscribe(
+      (data) => console.log(data),
+      (err) => console.error(err)
+    );
+  }
+
+  onAdd() {
     this.router.navigate(['location', 'add']);
   }
 
-  public onRemove(location: ILocation, idx: number) {
+  onRemove(location: ILocation, idx: number) {
     console.log('onRemove');
+    this.deleteLocation(location);
   }
 
-  public onEdit(location: ILocation) {
+  onSetDefault(location: ILocation, idx: number) {
+    console.log(`onMakeDefault: ${location.name}, ${idx}`);
+    for (const l of this.locations) { l.default = false; }
+    location.default = true;
+    this.setDefault(location);
+  }
+
+  onEdit(location: ILocation) {
     console.log('onEdit');
     this.router.navigate(['location', location._id]);
   }

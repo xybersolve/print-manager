@@ -57,6 +57,9 @@
             Sort Order
           </th>
           <th>
+            Default
+          </th>
+          <th>
             Active
           </th>
           <th>
@@ -77,11 +80,24 @@
               (click)="onEdit(line, idx);">
             {{line?.description}}
           </td>
-          
+
           <td class="right-align cursor-hand">
             {{line?.sortOrder}}
           </td>
 
+          <td class="text-center">
+            <div *ngIf="line.default === undefined || line.default === false">
+              <button class="btn btn-sm btn-outline-secondary"
+                      (click)="onSetDefault(line, idx);">
+                Make Default
+              </button>
+            </div>
+            <div *ngIf="line.default === true" 
+                  class="is-selected">
+              <i class="fa fa-check"></i> Default
+            </div>
+          </td>
+  
           <td class="center-align centered">
             <input [(ngModel)]="line.active" 
                    [ngModelOptions]="{standalone: true}" 

@@ -6,6 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 
 import { IInventory, IInventoryItem } from '../models/inventory.model';
 import { CommonService } from '../services/common.service';
+import { ConfigurationService } from '../../configs/configuration.service';
 
 @Injectable({
   providedIn: 'root'

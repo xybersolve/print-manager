@@ -165,7 +165,7 @@ export class InventoryComponent implements OnInit {
   confirmSold(template: TemplateRef<any>, inventory: IInventoryItem, idx: number) {
     this.selectedInventory = inventory;
     this.selectedIdx = idx;
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
   }
   // Delete confirmation
   confirmDelete(template: TemplateRef<any>, inventory: IInventoryItem, idx: number) {

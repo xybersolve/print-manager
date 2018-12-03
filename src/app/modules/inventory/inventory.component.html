@@ -80,41 +80,20 @@
                 <td (click)="onEdit(inventory, idx);" class="cursor-hand">{{inventory.action}}</td>
                 <td (click)="onEdit(inventory, idx);" class="cursor-hand">{{inventory.location}}</td>
                 <td (click)="onEdit(inventory, idx);" class="cursor-hand">{{inventory.material}}</td>
-                <td (click)="confirmSold(soldTemplate, inventory, idx)"
-                    class="center-align cursor-hand centered">
-                    <!-- fa-usd, fa-btc -->
+                <td class="center-align centered">
+                  <div *ngIf="inventory.action === 'Delivered' || inventory.action === 'Stock'">
+                    <button class="btn btn-sm btn-outline-secondary"
+                            (click)="confirmSold(soldTemplate, inventory, idx);">
+                      Mark Sold
+                    </button>
+                  </div>                    <!-- fa-usd, fa-btc -->
                   <!-- <i class="fa fa-check xs-light" aria-hidden="true"></i> -->
-                  <i class="fa fa-btc" aria-hidden="true"></i>
                 </td>
                 <td (click)="confirmDelete(deleteTemplate, inventory, idx);"
                     class="center-align cursor-hand centered">
                   <i class="fa fa-times" style="color:red;" aria-hidden="true"></i>
                   <!-- <i class="fa fa-trash xs-light" aria-hidden="true"></i> -->
                 </td>
- 
-                <!--
-                <td class="center-align cursor-hand centered">
-                  <div class="btn-group" dropdown>
-                    <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-                            aria-controls="dropdown-basic">
-                      Actions<span class="caret"></span>
-                    </button>
-                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-                        role="menu" aria-labelledby="button-basic">
-                      <li role="menuitem"><a class="dropdown-item" href="#">Mark Sold</a></li>
-                      <li style="margin:6px 0 0 0;padding:6px 0 0 0;" class="divider dropdown-divider"></li>
-                      <li role="menuitem"><a class="dropdown-item" href="#">Delete</a>
-                      </li>
-                    </ul>
-                  </div>
-                </td>
-              -->
-                <!--
-                <td class="center-align cursor-hand centered"
-                    (click)="onRemove(inventory, idx);">
-                  <i class="fa fa-trash xs-light" aria-hidden="true"></i>
-                </td>
-              -->
               </tr>
             </tbody>
           </table>

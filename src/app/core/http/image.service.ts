@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angul
 import { Observable, throwError, ReplaySubject } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
+
 /*
 // Observable class extensions
 import 'rxjs/add/observable/of';
@@ -21,6 +22,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { IImage } from '../models/image.model';
 import { CommonService } from '../services/common.service';
+import { ConfigurationService } from '../../configs/configuration.service';
 
 @Injectable({
   providedIn: 'root'

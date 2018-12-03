@@ -6,6 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 
 import { ILine, ILineBrief } from '../models/line.model';
 import { CommonService } from '../services/common.service';
+import { ConfigurationService } from '../../configs/configuration.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,32 +18,38 @@ export class LineService {
 
   constructor(
     private http: HttpClient,
+    private config: ConfigurationService,
     private common: CommonService
   ) {
-    this.baseUrl = `${this.common.baseRestUrl}/lines`;
+    this.baseUrl = `${this.config.baseRestUrl}/lines`;
    }
 
-  public getAll(): Observable<ILine[]> {
+  getAll(): Observable<ILine[]> {
     const url = `${this.baseUrl}`;
     return this.http.get<ILine[]>(url);
   }
 
-  public get(id: any): Observable<ILine> {
+  get(id: any): Observable<ILine> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.get<ILine>(url);
   }
 
-  public getAllBrief(): Observable<ILineBrief[]> {
+  getAllBrief(): Observable<ILineBrief[]> {
     const url = `${this.baseUrl}/brief`;
     return this.http.get<ILineBrief[]>(url);
   }
 
-  public add(line: ILine): Observable<ILine> {
+  add(line: ILine): Observable<ILine> {
     const url = `${this.baseUrl}`;
     return this.http.post<ILine>(url, line, this.common.headers);
   }
 
-  public update(line: ILine): Observable<any> {
+  setDefault(line: ILine): Observable<any> {
+    const url = `${this.baseUrl}/default/${line._id}`;
+    return this.http.put<any>(url, line, this.common.headers);
+  }
+
+  update(line: ILine): Observable<any> {
     const url = `${this.baseUrl}/${line._id}`;
     console.log('lineService.update');
     return this.http.put<any>(url, line, this.common.headers);

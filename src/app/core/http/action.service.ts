@@ -8,6 +8,7 @@ import { IAction } from '../models/action.model';
 import { CommonService } from '../services/common.service';
 import { ConfigurationService } from '../../configs/configuration.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,22 +22,27 @@ export class ActionService {
     this.baseUrl = `${this.config.baseRestUrl}/actions`;
   }
 
-  public getAll() {
+  getAll() {
     const url = `${this.baseUrl}/`;
     return this.http.get<IAction[]>(url);
   }
 
-  public get(id: any) {
+  get(id: any) {
     const url = `${this.baseUrl}/${id}`;
     return this.http.get<IAction>(url);
   }
 
-  public update(action: IAction): Observable<any> {
+  update(action: IAction): Observable<any> {
     const url = `${this.baseUrl}/${action._id}`;
     return this.http.put<any>(url, action, this.common.headers);
   }
 
-  public add(action: IAction): Observable<IAction> {
+  setDefault(action: IAction): Observable<any> {
+    const url = `${this.baseUrl}/default/${action._id}`;
+    return this.http.put<any>(url, action, this.common.headers);
+  }
+
+  add(action: IAction): Observable<IAction> {
     const url = `${this.baseUrl}/`;
     return this.http.post<IAction>(url, {action: IAction});
   }

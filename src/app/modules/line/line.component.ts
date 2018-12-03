@@ -42,7 +42,6 @@ export class LineComponent implements OnInit {
     });
   }
 
-
   private getLines(): void {
     this.lineService
       .getAll()
@@ -64,21 +63,36 @@ export class LineComponent implements OnInit {
       );
   }
 
-  public onAdd() {
+  private setDefault(line: ILine) {
+    this.lineService.setDefault(line)
+    .subscribe(
+      (data) => console.log(data),
+      (err) => console.error(err)
+    );
+  }
+
+  onAdd() {
     this.router.navigate(['line', 'add']);
   }
 
-  public onEdit(line, idx) {
+  onEdit(line, idx) {
     console.log(`edit line: ${idx}`);
     console.dir(line);
     this.router.navigate(['line', line._id]);
   }
 
-  public onChangeActive(line) {
+  onChangeActive(line) {
     this.updateLine(line);
   }
 
-  public onRemove(line, idx) {
+  onSetDefault(line: ILine, idx: number) {
+    console.log(`onMakeDefault: ${line.name}, ${idx}`);
+    for (const ln of this.lines) { ln.default = false; }
+    line.default = true;
+    this.setDefault(line);
+  }
+
+  onRemove(line, idx) {
     console.log(`remove line: ${idx}`);
     console.dir(line);
     this.lines.splice(idx, 1);
