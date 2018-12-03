@@ -1,11 +1,189 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Inventory</h2>
-    </div>
-  </div>
-</div>
+    <div class="row">
+      <div class="col-xs-6">
+        <h3>{{title}}</h3>
+      </div>
+    </div>  
+    
+    <div class="row">
+      <div class="col-md-12">
+        <button class="float-right btn btn-outline-primary btn-sm"
+                (click)="createInvoice();">
+          Create Invoice
+        </button>
+      </div>  
+      
+      <div class="col-xs-12" style="margin-bottom:10px;">
+        <!-- Location Selector -->
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <label for="location">Location:</label>
+                <select class="form-control"
+                        style="margin-bottom: 12px;"
+                        id="location"
+                        [(ngModel)]='locationFilter'>
+                      <option value='All'>All</option>
+                      <option *ngFor='let location of locations'
+                              [ngValue]="location.name">
+                    {{location?.name}}
+                  </option>  
+                </select>
+              </td>
 
-<div>
+              <td class="pl-2">
+                <label for="action">Action:</label>
+                <select class="form-control"
+                        style="margin-bottom: 12px;"
+                        id="action"
+                        [(ngModel)]='actionFilter'>
+                      <option value='All'>All</option>
+                      <option *ngFor='let action of actions'
+                              [ngValue]="action.action">
+                    {{action?.action}}
+                  </option>  
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
   
-</div>
+        </div> 
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table table-bordered table-hover table-stripped table-condensed" width="100%" style="width:100%">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Date</th>
+                <th>Action</th>
+                <th>Location</th>
+                <th>Material</th>
+                <th class="center-align">
+                  Sold
+                </th>
+                <!-- <th>Commission</th> -->
+                <th class="center-align">
+                  Delete
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class=""
+                  *ngFor="let inventory of filteredInventory; let odd = odd; let even = even; let idx = index;"
+                  [ngClass]="{odd:odd,even:even}">
+    
+                <td (click)="onEdit(inventory, idx);" class="cursor-hand">{{inventory.name}}</td>
+                <td (click)="onEdit(inventory, idx);" class="cursor-hand">{{inventory.size}}</td>
+                <td (click)="onEdit(inventory, idx);" class="cursor-hand">{{inventory.date | date:'yyyy-MM-dd'}}</td>
+                <td (click)="onEdit(inventory, idx);" class="cursor-hand">{{inventory.action}}</td>
+                <td (click)="onEdit(inventory, idx);" class="cursor-hand">{{inventory.location}}</td>
+                <td (click)="onEdit(inventory, idx);" class="cursor-hand">{{inventory.material}}</td>
+                <td (click)="confirmSold(soldTemplate, inventory, idx)"
+                    class="center-align cursor-hand centered">
+                    <!-- fa-usd, fa-btc -->
+                  <!-- <i class="fa fa-check xs-light" aria-hidden="true"></i> -->
+                  <i class="fa fa-btc" aria-hidden="true"></i>
+                </td>
+                <td (click)="confirmDelete(deleteTemplate, inventory, idx);"
+                    class="center-align cursor-hand centered">
+                  <i class="fa fa-trash xs-light" aria-hidden="true"></i>
+                </td>
+ 
+                <!--
+                <td class="center-align cursor-hand centered">
+                  <div class="btn-group" dropdown>
+                    <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                            aria-controls="dropdown-basic">
+                      Actions<span class="caret"></span>
+                    </button>
+                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem"><a class="dropdown-item" href="#">Mark Sold</a></li>
+                      <li style="margin:6px 0 0 0;padding:6px 0 0 0;" class="divider dropdown-divider"></li>
+                      <li role="menuitem"><a class="dropdown-item" href="#">Delete</a>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              -->
+                <!--
+                <td class="center-align cursor-hand centered"
+                    (click)="onRemove(inventory, idx);">
+                  <i class="fa fa-trash xs-light" aria-hidden="true"></i>
+                </td>
+              -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <!--
+    <div>
+      {{inventory | json}}
+    </div>
+    -->
+  </div>  
+
+
+<ng-template #soldTemplate>
+  <div class="modal-body text-center">
+    <h4>Mark as Sold?</h4>
+    <table class="text-left">
+      <tbody>
+        <tr>
+          <td class="text-right">Name:</td>
+          <td class="pl-2">{{selectedInventory.name}}</td>
+        </tr>
+        <tr>
+          <td class="text-right">Name:</td>
+          <td class="pl-2">{{selectedInventory.material}}</td>
+        </tr>
+        <tr>
+          <td class="text-right">Size:</td>
+          <td class="pl-2">{{selectedInventory.size}}</td>
+        </tr>
+        <tr>
+          <td class="text-right">Location:</td>
+          <td class="pl-2">{{selectedInventory.location}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <button type="button" class="btn btn-default" (click)="onSoldConfirm(selectedInventory)" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="onDeclineNoop()">No</button>
+  </div>
+</ng-template>
+
+<ng-template #deleteTemplate>
+    <div class="modal-body text-center">
+      <h4>Delete Inventory Item?</h4>
+      <table class="text-left">
+        <tbody>
+          <tr>
+            <td class="text-right">Name:</td>
+            <td class="pl-2">{{selectedInventory.name}}</td>
+          </tr>
+          <tr>
+            <td class="text-right">Name:</td>
+            <td class="pl-2">{{selectedInventory.material}}</td>
+          </tr>
+          <tr>
+            <td class="text-right">Size:</td>
+            <td class="pl-2">{{selectedInventory.size}}</td>
+          </tr>
+          <tr>
+            <td class="text-right">Location:</td>
+            <td class="pl-2">{{selectedInventory.location}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+      <button type="button" class="btn btn-default" (click)="onDeleteConfirm(selectedInventory)" >Yes</button>
+      <button type="button" class="btn btn-primary" (click)="onDeclineNoop()">No</button>
+    </div>
+  </ng-template>
