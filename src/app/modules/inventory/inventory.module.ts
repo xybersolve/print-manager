@@ -18,6 +18,7 @@ import { from } from 'rxjs';
   ],
   declarations: [
     InventoryComponent
-  ]
+  ],
+  exports: []
 })
 export class InventoryModule { }

@@ -12,34 +12,51 @@
         <input [(ngModel)]="activeOnly" type="checkbox" data-toggle="toggle">&nbsp;&nbsp;Active Only
       </label>
     </div>  
-
     -->  
-    <div class="col-md-12">
-      <button class="float-right btn btn-outline-primary btn-sm"
-              (click)="onAdd();">
-        Create Invoice
-      </button>
-    </div>  
-    
-    <div class="col-xs-12" style="margin-bottom:10px;">
+   
+    <div class="col-md-12 mb-3">
       <!-- Location Selector -->
-      <label for="location">Location:</label>
-      <select class="form-control"
-              style="margin-bottom: 12px;"
-              id="location"
-              [(ngModel)]='locationFilter'>
+      <table>
+        <tbody>
+          <tr class="mb-3">
+            <td>
+              <label for="location">Location:</label>
+              <select class="form-control bg-lightgrey"
+                      id="location"
+                      [(ngModel)]='locationFilter'>
+                    <option value='All'>All</option>
+                    <option *ngFor='let location of locations'
+                            [ngValue]="location.name">
+                  {{location?.name}}
+                </option>  
+              </select>
+            </td>
 
-            <option *ngFor='let location of locations'
-                    [ngValue]="location.name">
-          {{location?.name}}
-        </option>  
-      </select>
-
-      </div> 
-    </div>
+            <td class="pl-2">
+              <label for="action">Action:</label>
+              <select class="form-control bg-lightgrey"
+                      id="action"
+                      [(ngModel)]='actionFilter'>
+                    <option value='All'>All</option>
+                    <option *ngFor='let action of actions'
+                            [ngValue]="action.action">
+                  {{action?.action}}
+                </option>  
+              </select>
+            </td>
+            <td width="50%" >
+              <button class="float-right btn btn-warning btn-sm"
+                      (click)="onAdd();">
+                Create Invoice
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    
 
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-md-12">
         <table class="table table-bordered table-hover table-stripped table-condensed" width="100%" style="width:100%">
           <thead>
             <tr>

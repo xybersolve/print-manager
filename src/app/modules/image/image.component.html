@@ -6,32 +6,49 @@
   </div>
   <div class="row">
     <div class="col-xs-12" style="width:100%;">
-      <label>
-         <input [(ngModel)]="activeOnly" type="checkbox" data-toggle="toggle">&nbsp;&nbsp;Active Only
-      </label>
-      
-      <button class="float-right btn btn-outline-primary btn-sm"
-              (click)="onAddImage();">
-      Add Image
-      </button>
-      
+      <table>
+        <tbody>
+          <tr class="mb-3 mx-3">
+            <td>
+              <label>
+                <input [(ngModel)]="activeOnly" 
+                       type="checkbox" 
+                       data-toggle="toggle">
+                  &nbsp;&nbsp;Active Only
+              </label>
+            </td>
+
+            <td class="px-4 py-4">  
+                <input type="text" 
+                class="form-control filter-input bg-lightgrey" 
+                style="width:80%;display:inline-block;"
+                id="image-filter"
+                [(ngModel)]='imageFilter'
+                placeholder='lighthouse' >
+
+             <button type="button"
+                class="btn btn-light"  
+                style='display:inline-block;margin-left:4px;height:25px;width:15%;padding-top:0;margin-top:0;' 
+                (click)='onClearImageFilter()'>
+            
+              <i class="fa fa-times fa-1x"  aria-hidden="true"></i>
+          </button>   
+            </td>    
+
+            <td width="50%">
+              <button class="float-right btn btn-warning btn-sm"
+                     (click)="onAddImage();">
+                Add Image
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>        
     </div>
 
     <div class="col-xs-12" style="margin-bottom:10px;">
-      <input type="text" 
-             class="form-control filter-input" 
-             style="width:80%;display:inline-block;"
-             id="image-filter"
-             [(ngModel)]='imageFilter'
-             placeholder='lighthouse' >
 
-      <button type="button"
-            class="btn btn-light"  
-            style='display:inline-block;margin-left:4px;height:25px;width:15%;padding-top:0;margin-top:0;' 
-            (click)='onClearImageFilter()'>
-        
-          <i class="fa fa-times fa-1x"  aria-hidden="true"></i>
-      </button>   
+
     </div> 
   </div>
   <div class="row">

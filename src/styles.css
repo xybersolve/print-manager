@@ -89,3 +89,7 @@ h2 {
   border-left: 5px solid #a94442; /* red */
 }
 
+
+.bg-lightgrey {
+  background-color: #eee;
+}

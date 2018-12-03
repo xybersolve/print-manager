@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { CommonService } from '../../../core/services/common.service';
+import { ConfigurationService } from '../../../configs/configuration.service';
 import { ImageService } from '../../../core/http/image.service';
 import { SizeService } from '../../../core/http/size.service';
 import { MaterialService } from '../../../core/http/material.service';
@@ -42,6 +43,7 @@ export class InvoiceDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private config: ConfigurationService,
     private common: CommonService,
     private imageService: ImageService,
     private sizeService: SizeService,
@@ -52,7 +54,7 @@ export class InvoiceDetailComponent implements OnInit {
   ) {}
 
   // size filter from aspect ratios
-  _selectedAspectRatio = '2:3';
+  _selectedAspectRatio = this.config.defaults.aspectRatio;
   get ratioFilter(): string {
     return this._selectedAspectRatio;
   }
@@ -73,7 +75,7 @@ export class InvoiceDetailComponent implements OnInit {
     this.filteredImages = this.imageFilter ? this.filterImages(this.imageFilter) : this.images;
   }
 
-  selectedMaterial = 'Metal Print';
+  selectedMaterial = this.config.defaults.material;
   get selectMaterial(): string {
     return this.selectedMaterial;
   }
@@ -81,7 +83,7 @@ export class InvoiceDetailComponent implements OnInit {
   set selectMaterial(materialType: string) {
     this.selectedMaterial = materialType;
   }
-  selectedLocation = 'Many Hands Gallery';
+  selectedLocation = this.config.defaults.location;
   get selectLocation(): string {
     return this.selectedLocation;
   }
@@ -90,7 +92,7 @@ export class InvoiceDetailComponent implements OnInit {
     this.invoice.location = locationName;
   }
 
-  selectedAction = 'Stock';
+  selectedAction = this.config.defaults.action;
   get selectAction(): string {
     return this.selectedAction;
   }

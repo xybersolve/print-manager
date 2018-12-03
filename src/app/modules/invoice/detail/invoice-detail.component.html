@@ -24,7 +24,7 @@
     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
       <!-- Filter Images -->
       <input type="text" 
-                  class="form-control filter-input" 
+                  class="form-control filter-input bg-lightgrey" 
                   style="width:80%;display:inline-block;"
                   id="image-filter" 
                   [(ngModel)]='imageFilter'
@@ -58,8 +58,7 @@
 
          <label for="materials">Materials:</label>
          <!-- [(ngModel)]="selectedAspectRatio" -->  
-         <select class="form-control"
-                 style="margin-bottom: 12px;"
+         <select class="form-control bg-lightgrey mb-3"
                  id="materials"
                  [(ngModel)]='selectedMaterial'
                  required>
@@ -75,8 +74,7 @@
         <label for="aspect-ratios">Aspect ratio:</label>
 
         <!-- [(ngModel)]="selectedAspectRatio" -->  
-        <select class="form-control"
-                style="margin-bottom: 12px;"
+        <select class="form-control bg-lightgrey mb-3"
                 id="aspect-ratios"
                 [(ngModel)]='ratioFilter'
                 required>
@@ -141,7 +139,7 @@
                 </tbody>
               </table>
               <button type="button" 
-                      class="btn btn-primary add-button"
+                      class="btn btn-warning add-button"
                       [disabled]="! isValidInvoiceItem()"
                       (click)="onItemAdd()">
                 Add Item to Invoice
@@ -158,7 +156,7 @@
 
                 <!-- Location Selector -->
                 <label for="location">Location:</label>
-                <select class="form-control mb-12"
+                <select class="form-control mb-3 bg-lightgrey"
                         id="location"
                         name="location"
                         [(ngModel)]='selectLocation'
@@ -174,7 +172,7 @@
               <div>
                 <!-- Action Selector -->
                 <label for="action">Action:</label>
-                <select class="form-control mb-12"
+                <select class="form-control mb-3 bg-lightgrey"
                         name="action"
                         id="action"
                         [(ngModel)]='selectAction'
@@ -191,17 +189,10 @@
               <div>
                 <label for="invoice-date">Date:</label>
                 <input type="date" 
-                       class="form-control" 
+                       class="form-control bg-lightgrey" 
                        name="invoice-date"
                        [ngModel] ="invoice?.date | date:'yyyy-MM-dd'" 
                        (ngModelChange)="invoice.date = $event">
-                 <!-- 
-                 <input type="date"
-                       name="invoice-date"
-                       id="invoice-date"
-                       [(ngModel)]="invoice.date" 
-                       class="form-control"   />
-                  -->     
               </div>
               <hr />
               
@@ -221,14 +212,14 @@
                         {{item?.size | xsSizeFormat:'short'}}
                       </td>
                       <td>
-                        {{item?.name | xsTruncate:10}}
+                        {{item?.name | xsTruncate:15}}
                       </td>
                       <td>
                         {{item?.material | xsMaterialAcronym}}
                       </td>
                       <td (click)="onRemoveItem(idx);"
                           class="action-item">
-                        <i class="fa fa-times fa-1x" color="red" aria-hidden="true"></i>
+                        <i class="fa fa-times" style="color:red;" aria-hidden="true"></i>
                       </td>
                     </tr>
                   </tbody>

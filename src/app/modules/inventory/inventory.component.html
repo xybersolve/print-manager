@@ -7,21 +7,20 @@
     
     <div class="row">
       <div class="col-md-12">
-        <button class="float-right btn btn-outline-primary btn-sm"
+        <button class="float-right btn btn-warning btn-sm"
                 (click)="createInvoice();">
           Create Invoice
         </button>
       </div>  
       
-      <div class="col-xs-12" style="margin-bottom:10px;">
+      <div class="col-md-12 mb-3">
         <!-- Location Selector -->
         <table>
           <tbody>
-            <tr>
+            <tr class="mb-3">
               <td>
                 <label for="location">Location:</label>
-                <select class="form-control"
-                        style="margin-bottom: 12px;"
+                <select class="form-control bg-lightgrey"
                         id="location"
                         [(ngModel)]='locationFilter'>
                       <option value='All'>All</option>
@@ -34,8 +33,7 @@
 
               <td class="pl-2">
                 <label for="action">Action:</label>
-                <select class="form-control"
-                        style="margin-bottom: 12px;"
+                <select class="form-control bg-lightgrey"
                         id="action"
                         [(ngModel)]='actionFilter'>
                       <option value='All'>All</option>
@@ -48,7 +46,6 @@
             </tr>
           </tbody>
         </table>
-  
         </div> 
       </div>
 
@@ -91,7 +88,8 @@
                 </td>
                 <td (click)="confirmDelete(deleteTemplate, inventory, idx);"
                     class="center-align cursor-hand centered">
-                  <i class="fa fa-trash xs-light" aria-hidden="true"></i>
+                  <i class="fa fa-times" style="color:red;" aria-hidden="true"></i>
+                  <!-- <i class="fa fa-trash xs-light" aria-hidden="true"></i> -->
                 </td>
  
                 <!--
@@ -137,7 +135,7 @@
       <tbody>
         <tr>
           <td class="text-right">Name:</td>
-          <td class="pl-2">{{selectedInventory.name}}</td>
+          <td class="pl-2">{{selectedInventory.name }}</td>
         </tr>
         <tr>
           <td class="text-right">Name:</td>
@@ -166,7 +164,7 @@
         <tbody>
           <tr>
             <td class="text-right">Name:</td>
-            <td class="pl-2">{{selectedInventory.name}}</td>
+            <td class="pl-2">{{selectedInventory.name }}</td>
           </tr>
           <tr>
             <td class="text-right">Name:</td>

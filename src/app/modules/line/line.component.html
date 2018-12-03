@@ -12,7 +12,7 @@
     </div>  
 
     <div class="col-md-6 right-align">
-      <button class="float-right btn btn-outline-primary btn-sm"
+      <button class="float-right btn btn-warning btn-sm"
               (click)="onAdd();">
         Add Line
       </button>
@@ -93,7 +93,7 @@
           <td class="center-align cursor-hand centered"
               (click)="onRemove(line, idx);">
 
-            <i class="fa fa-trash xs-light" aria-hidden="true"></i>
+              <i class="fa fa-times" style="color:red;" aria-hidden="true"></i>
           </td>
         </tr>
       </tbody>

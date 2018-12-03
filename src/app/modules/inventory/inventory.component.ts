@@ -10,6 +10,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { InventoryService } from '../../core/http/inventory.service';
 import { LocationService } from '../../core/http/location.service';
 import { ActionService } from '../../core/http/action.service';
+import { ConfigurationService } from '../../configs/configuration.service';
 
 // model imports
 import { IInventoryItem } from '../../core/models/inventory.model';
@@ -28,29 +29,35 @@ export class InventoryComponent implements OnInit {
   selectedInventory: IInventoryItem;
   selectedIdx: number;
   locations: ILocationBrief[] = [];
-  _locationFilter = 'Many Hands Gallery';
+  _locationFilter: string;
 
   actions: IAction[] = [];
-  _actionFilter = 'Delivered';
+  _actionFilter: string;
 
   confirmSoldMessage: string;
   modalRef: BsModalRef;
   message: string;
 
   constructor(
+    private modalService: BsModalService,
     private router: Router,
     private route: ActivatedRoute,
     private inventoryService: InventoryService,
     private locationService: LocationService,
     private actionService: ActionService,
-    private modalService: BsModalService
-  ) {  }
+    private config: ConfigurationService
+  ) {
+    this._locationFilter = config.defaults.location;
+    this._actionFilter = config.defaults.action;
+   }
 
   ngOnInit() {
     this.getInventory();
     this.getLocations();
     this.getActions();
   }
+
+  // Filtering routines
   // location filter
   get locationFilter(): string {
     return this._locationFilter;
@@ -79,13 +86,14 @@ export class InventoryComponent implements OnInit {
   set actionFilter(value: string) {
     this._actionFilter = value;
     this.filterInventory();
-    console.log(`actionFilter: ${this._actionFilter}`);
   }
+
+  // HTTP Rest calls
   private getInventory() {
     this.inventoryService.getAll()
       .subscribe(
         data => {
-          this.inventory = data; 
+          this.inventory = data;
           this.filteredInventory = this.filterInventory();
         },
         err => console.error(err)

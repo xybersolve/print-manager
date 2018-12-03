@@ -32,6 +32,7 @@ import { MessageComponent } from './modules/message/message.component';
 // import { InventoryListComponent } from './inventory/list/inventory-list.component';
 // import { SidebarComponent } from './sidebar/sidebar.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

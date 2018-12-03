@@ -6,6 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 
 import { IAction } from '../models/action.model';
 import { CommonService } from '../services/common.service';
+import { ConfigurationService } from '../../configs/configuration.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,10 @@ export class ActionService {
   baseUrl: string;
   constructor(
     private http: HttpClient,
-    private common: CommonService
+    private common: CommonService,
+    private config: ConfigurationService
   ) {
-    this.baseUrl = `${this.common.baseRestUrl}/actions`;
+    this.baseUrl = `${this.config.baseRestUrl}/actions`;
   }
 
   public getAll() {
