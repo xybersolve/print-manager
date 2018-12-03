@@ -1,5 +1,5 @@
 export class IImage {
-  _id?: number; // default new books at 0, server will update when creating
+  _id?: any; // default new books at 0, server will update when creating
   active = true;
   fileStub: string;
   line: string;

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { InvoiceRoutingModule } from './invoice-routing.module';
 import { InvoiceComponent } from './invoice.component';
+import { InvoiceDetailComponent } from './detail/invoice-detail.component';
 
 import { SortBySizePipe } from './sort-by-size.pipe';
 import { TruncatePipe } from '../../shared/pipes/truncate.pipe';
@@ -18,13 +19,13 @@ import { SizeFormatPipe } from '../../shared/pipes/size.format.pipe';
   ],
   declarations: [
     InvoiceComponent,
+    InvoiceDetailComponent,
     SortBySizePipe,
     TruncatePipe,
     MaterialAcronymPipe,
     SizeFormatPipe
   ],
   exports: [
-    InvoiceComponent,
     TruncatePipe,
     MaterialAcronymPipe,
     SizeFormatPipe

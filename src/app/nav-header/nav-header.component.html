@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-light bg-light">
     <a class="navbar-brand" href="#">Print Manager</a>
     <ul class="navbar-nav text-uppercase ml-auto">
@@ -10,15 +11,41 @@
       <li class="nav-item">
           <a class='nav-link' [routerLink]="['/image']" routerLinkActive='active'>Images</a>
       </li>
-      <li class="nav-item">
-        <a class='nav-link' [routerLink]="['/line']" routerLinkActive='active'>Lines</a>
-      </li>
-  
-      <li class="nav-item">
-        <a class='nav-link' [routerLink]="['/location']" routerLinkActive='active'>Locations</a>
+      <li class="dropdown" dropdown>
+        <div class="btn-group" dropdown>
+          <button id="button-config" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
+                  aria-controls="dropdown-config">
+                Attrbutes <span class="caret"></span>
+          </button>
+          <ul id="dropdown-config" 
+              *dropdownMenu class="dropdown-menu"
+              role="menu" 
+              aria-labelledby="button-config">
+            <li role="menuitem">
+              <a class="dropdown-item" href="#" class='nav-link' [routerLink]="['/location']" routerLinkActive='active'>Locations</a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="#" class='nav-link' [routerLink]="['/line']" routerLinkActive='active'>Lines</a>
+            </li>
+          </ul>
+        </div>
+        <!--
+        <a dropdownToggle role="button">
+          Attributes <span class="caret"></span>
+        </a>
+        <ul *dropdownMenu class="dropdown-menu">
+          <li>
+            <a href="#">Lines</a>
+          </li>
+          <li>
+            <a href="#">Locations</a>
+          </li>
+        </ul>
+      -->
       </li>
     </ul>
   </nav>
+
 <!--
 <nav class='pa-navbar navbar navbar-expand-lg bg-info' >
   <a class='navbar-brand brand-title' [routerLink]="['/home']">{{brandTitle}}</a>

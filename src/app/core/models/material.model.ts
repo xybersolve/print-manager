@@ -1,5 +1,6 @@
 export class IMaterial {
-  _id: number;
+  _id?: any;
   id: number;
   material: string;
+  owner: string;
 }

@@ -16,7 +16,7 @@ export class InvoiceService {
     private http: HttpClient,
     private common: CommonService
   ) {
-    this.baseUrl = `${this.common.baseRestUrl}/invoice`;
+    this.baseUrl = `${this.common.baseRestUrl}/invoices`;
   }
 
   getAll() {
@@ -29,8 +29,21 @@ export class InvoiceService {
     return this.http.get<IInvoice>(url);
   }
 
-  save(invoice: IInvoice): Observable<IInvoice> {
-    const url = `${this.baseUrl}/`;
-    return this.http.post<IInvoice>(url, {invoice: IInvoice});
+  update(invoice: IInvoice): Observable<any> {
+    const url = `${this.baseUrl}/${invoice._id}`;
+    return this.http.put<any>(url, invoice, this.common.headers);
   }
+
+  add(invoice: IInvoice): Observable<IInvoice> {
+    console.log('invoiceService.add()');
+    console.dir(invoice);
+    const url = `${this.baseUrl}`;
+    return this.http.post<IInvoice>(url, invoice, this.common.headers);
+  }
+
+  delete(id: string): Observable<void> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.delete<void>(url);
+  }
+
 }

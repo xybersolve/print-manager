@@ -8,5 +8,7 @@ export class ILine {
 }
 
 export class ILineBrief {
+  _id?: any;
   name: string;
+  owner?: string;
 }

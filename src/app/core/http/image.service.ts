@@ -26,10 +26,6 @@ import { CommonService } from '../services/common.service';
   providedIn: 'root'
 })
 export class ImageService {
-  headers = {};
-  options = {};
-  images: IImage[] = [];
-  selected: IImage[] = [];
   baseUrl: string;
 
   constructor(

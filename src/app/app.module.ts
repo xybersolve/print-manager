@@ -15,6 +15,9 @@ import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+// support modules
+import { BootstrapModule } from './modules/bootstrap/bootstrap.module';
+
 // feature modules
 import { InvoiceModule } from './modules/invoice/invoice.module';
 import { InventoryModule } from './modules/inventory/inventory.module';
@@ -25,6 +28,7 @@ import { LocationModule } from './modules/location/location.module';
 
 // feature components
 import { MessageComponent } from './modules/message/message.component';
+// import { InvoiceComponent } from './modules/invoice/invoice.component';
 // import { InventoryListComponent } from './inventory/list/inventory-list.component';
 // import { SidebarComponent } from './sidebar/sidebar.component';
 
@@ -39,6 +43,7 @@ import { MessageComponent } from './modules/message/message.component';
   ],
   imports: [
     BrowserModule,
+    BootstrapModule,
     // BrowserAnimationsModule,
     // MatButtonModule,
     // MatIconModule,

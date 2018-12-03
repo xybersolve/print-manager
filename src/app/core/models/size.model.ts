@@ -1,5 +1,5 @@
 export class ISize {
-  _id: number;
+  _id?: any;
   cost: number;
   id: number;
   price: number;
@@ -8,8 +8,11 @@ export class ISize {
   sizeSort: number;
   sortOrder: number;
   volume: number;
+  owner?: string;
 }
 
 export class IAspectRatio {
+  _id?: any;
   ratio: string;
+  owner?: string;
 }

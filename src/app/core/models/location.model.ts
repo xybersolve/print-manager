@@ -1,5 +1,5 @@
 export class ILocation {
-  _id?: number;
+  _id?: any;
   name: string;
   commission: number;
   useCommision: boolean;
@@ -20,8 +20,9 @@ export class ILocation {
 }
 
 export class ILocationBrief {
-  _id: number;
-  location: string;
+  _id?: any;
+  name: string;
   email: string;
   commision: number;
+  owner: string;
 }
