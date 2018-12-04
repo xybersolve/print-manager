@@ -1,6 +1,6 @@
 export class IAction {
   _id?: number;
-  descractioniption: string;
+  description: string;
   owner: 'Greg Milligan';
   active: true;
 }

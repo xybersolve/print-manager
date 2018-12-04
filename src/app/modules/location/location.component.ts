@@ -35,8 +35,7 @@ export class LocationComponent implements OnInit {
     );
   }
 
-  private updateLocation(location: ILocation) {
-    console.log('updateLocation');
+  private update(location: ILocation) {
     this.locationService.update(location)
     .subscribe(
       (data) => console.log(data),
@@ -75,6 +74,11 @@ export class LocationComponent implements OnInit {
     location.default = true;
     this.setDefault(location);
   }
+
+  onChangeActive(location: ILocation) {
+    this.update(location);
+  }
+
 
   onEdit(location: ILocation) {
     console.log('onEdit');

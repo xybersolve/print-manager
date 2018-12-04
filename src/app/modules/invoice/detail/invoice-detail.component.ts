@@ -9,9 +9,11 @@ import { MaterialService } from '../../../core/http/material.service';
 import { LocationService } from '../../../core/http/location.service';
 import { InvoiceService } from '../../../core/http/invoice.service';
 import { ActionService } from '../../../core/http/action.service';
+import { AspectRatioService } from '../../../core/http/aspect-ratio.service';
 
 import { IImage } from '../../../core/models/image.model';
-import { ISize, IAspectRatio } from '../../../core/models/size.model';
+import { ISize } from '../../../core/models/size.model';
+import { IAspectRatio } from '../../../core/models/aspect-ratio.model';
 import { IMaterial } from '../../../core/models/material.model';
 import { ILocation, ILocationBrief } from '../../../core/models/location.model';
 import { IInvoice, IInvoiceItem } from '../../../core/models/invoice.model';
@@ -47,6 +49,7 @@ export class InvoiceDetailComponent implements OnInit {
     private common: CommonService,
     private imageService: ImageService,
     private sizeService: SizeService,
+    private aspectRatioService: AspectRatioService,
     private materialService: MaterialService,
     private locationService: LocationService,
     private invoiceService: InvoiceService,
@@ -155,8 +158,8 @@ export class InvoiceDetailComponent implements OnInit {
   }
 
   private getAspectRatios() {
-    this.sizeService
-      .getApectRatios()
+    this.aspectRatioService
+      .getAll()
       .subscribe(
         (data: IAspectRatio[]) => this.aspectRatios = data,
         (err: any) => console.error(err)

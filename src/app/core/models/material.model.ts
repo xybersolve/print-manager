@@ -3,4 +3,6 @@ export class IMaterial {
   id: number;
   material: string;
   owner: string;
+  default?: boolean;
+  active?: boolean;
 }

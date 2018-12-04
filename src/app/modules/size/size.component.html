@@ -1,10 +1,11 @@
 <div class="container">
     <div class="row">
       <div class="col-xs-6">
-        <h3>Locations</h3>
+        <h3>Sizes</h3>
+        <!-- <p>{{sizes | json}}</p> -->
       </div>
     </div>  
-    <!--
+    
     <div class="row">
       <div class="col-md-6">
         <label>
@@ -15,7 +16,7 @@
       <div class="col-md-6">
         <button class="float-right btn btn-warning btn-sm"
                 (click)="onAdd();">
-          Add Location
+          Add Size
         </button>
       </div>  
     </div>
@@ -24,52 +25,53 @@
           <table class="table table-bordered table-hover table-stripped table-condensed" width="100%" style="width:100%">
             <thead>
               <tr>
-                <th style="min-width:20%;">Name</th>
+                <th style="min-width:20%;">Size</th>
+                <th>Ratio</th>
+                <th>Volume</th>
                 <th>Owner</th>
-                <th>Commission</th>
-                <th>Default</th>
                 <th>Active</th>
                 <th class="center-align">
                   Delete
                 </th>
+                <th>Active</th>
               </tr>
             </thead>
             <tbody>
               <tr class=""
-                  *ngFor="let location of filteredLocations; let odd = odd; let even = even; let idx = index;"
+                  *ngFor="let size of filteredSizes; let odd = odd; let even = even; let idx = index;"
                   [ngClass]="{odd:odd,even:even}">
           
-                <td (click)="onEdit(location, idx);">{{location.name}}</td>
-                <td (click)="onEdit(location, idx);">{{location.owner}}</td>
-                <td (click)="onEdit(location, idx);">{{location.commission}}</td>
-                <td class="text-center">
-                  <div *ngIf="location.default === undefined || location.default === false">
-                    <button class="btn btn-sm btn-outline-secondary"
-                            (click)="onSetDefault(location, idx);">
-                      Make Default
-                    </button>
-                  </div>
-                  <div *ngIf="location.default === true" 
-                        class="is-selected">
-                    <i class="fa fa-check"></i> Default
-                  </div>
-                </td>
+                <td (click)="onEdit(size, idx);">{{size.size}}</td>
+                <td (click)="onEdit(size, idx);">{{size.ratio}}</td>
+                <td (click)="onEdit(size, idx);">{{size.volume}}</td>
+                <td (click)="onEdit(size, idx);">{{size.owner}}</td>
                 <td class="center-align centered">
-                  <input [(ngModel)]="location.active" 
+                  <input [(ngModel)]="size.active" 
                          [ngModelOptions]="{standalone: true}" 
-                         (change)="onChangeActive(location)" 
+                         (change)="onChangeActive(size)" 
                          type="checkbox"  
                          data-toggle="toggle">
                 </td>
                 <td class="center-align cursor-hand centered"
-                    (click)="onRemove(location, idx);">
-                    <i class="fa fa-times" style="color:red;" aria-hidden="true"></i>
+                    (click)="onRemove(size, idx);">
+                    <i class="fa fa-times delete-dark-red" aria-hidden="true"></i>
                 </td>
+                <td>{{size.active}}</td>
               </tr>
             </tbody>
           </table>
         </div>
     </div>
-  -->
-  </div>    
-  
+  </div>
+
+<!--
+cost:Object
+id:7
+price:Object
+ratio:"1:1"
+size:"16 x 16"
+sizeSort:256
+sortOrder:80
+volume:256
+owner:"Greg Milligan"
+-->

@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { SizeRoutingModule } from './size-routing.module';
-import { SizeComponent } from './size.component';
+import { AspectRatioRoutingModule } from './aspect-ratio-routing.module';
+import { AspectRatioComponent } from './aspect-ratio.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    SizeRoutingModule,
+    AspectRatioRoutingModule,
     FormsModule,
     ReactiveFormsModule
   ],
   declarations: [
-    SizeComponent
+    AspectRatioComponent
   ]
 })
-export class SizeModule { }
+export class AspectRatioModule { }

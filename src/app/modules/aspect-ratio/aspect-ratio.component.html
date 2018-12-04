@@ -1,12 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-6">
-      <h3>Materials</h3>
+      <h3>Aspect Ratios</h3>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12 mb-3">
-        <!-- material Selector -->
       <table>
           <tbody>
             <tr class="mb-3">
@@ -18,7 +17,7 @@
             </tr>
           </tbody>
         </table>
-     </div>     
+      </div>     
   </div> 
   <div class="row">
     <div class="col-xs-12">
@@ -26,7 +25,7 @@
         <thead>
           <tr>
             <!-- <th style="min-width:10%;">Id</th> -->
-            <th style="min-width:20%;">Name</th>
+            <th style="min-width:20%;">Ratio</th>
             <th>Owner</th>
             <th>Default</th>
             <th>Active</th>
@@ -38,33 +37,32 @@
         </thead>
         <tbody>
           <tr class=""
-              *ngFor="let material of filteredMaterials; let odd = odd; let even = even; let idx = index;"
+              *ngFor="let ratio of filteredRatios; let odd = odd; let even = even; let idx = index;"
               [ngClass]="{odd:odd,even:even}">
 
-            <!-- <td (click)="onEditImage(material, idx);" class="right-align">{{material.id}}</td> -->
-            <td (click)="onEdit(material, idx);">{{material.material}}</td>
-            <td (click)="onEdit(material, idx);">{{material.owner}}</td>
+            <td (click)="onEdit(ratio, idx);">{{ratio.ratio}}</td>
+            <td (click)="onEdit(ratio, idx);">{{ratio.owner}}</td>
             <td class="text-center">
-              <div *ngIf="material.default === undefined || material.default === false">
+              <div *ngIf="ratio.default === undefined || ratio.default === false">
                 <button class="btn btn-sm btn-outline-secondary"
-                        (click)="onSetDefault(material, idx);">
+                        (click)="onSetDefault(ratio, idx);">
                   Make Default
                 </button>
               </div>
-              <div *ngIf="material.default === true" 
+              <div *ngIf="ratio.default === true" 
                     class="is-selected">
                 <i class="fa fa-check"></i> Default
               </div>
             </td>
             <td class="center-align centered">
-              <input [(ngModel)]="material.active" 
+              <input [(ngModel)]="ratio.active" 
                       [ngModelOptions]="{standalone: true}" 
-                      (change)="onChangeActive(material)" 
+                      (change)="onChangeActive(ratio)" 
                       type="checkbox"  
                       data-toggle="toggle">
             </td>
             <td class="center-align cursor-hand centered"
-                (click)="onRemove(material, idx);">
+                (click)="onRemove(ratio, idx);">
                 <i class="fa fa-times delete-dark-red" aria-hidden="true"></i>
             </td>
           </tr>

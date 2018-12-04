@@ -30,4 +30,10 @@ export class MaterialService {
     return this.http.put<any>(url, material, this.common.headers);
   }
 
+  update(material: IMaterial): Observable<any> {
+    const url = `${this.baseUrl}/${material._id}`;
+    return this.http.put<any>(url, material, this.common.headers);
+  }
+
+
 }

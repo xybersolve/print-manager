@@ -30,7 +30,6 @@ export class ImageComponent implements OnInit {
     return this._activeOnly;
   }
   set activeOnly(value: boolean) {
-    console.log(`got activeOnly: ${value}`);
     this._activeOnly = !!value;
     this.filterImages();
   }

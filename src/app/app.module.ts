@@ -2,13 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
-// Material
-/*
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav'; */
-
+// root level components
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
@@ -25,42 +19,35 @@ import { ImageModule } from './modules/image/image.module';
 import { UserModule } from './modules/user/user.module';
 import { LineModule } from './modules/line/line.module';
 import { LocationModule } from './modules/location/location.module';
-
-// feature components
+import { SizeModule } from './modules/size/size.module';
+import { MaterialModule } from './modules/material/material.module';
 import { MessageComponent } from './modules/message/message.component';
-import { SizesComponent } from './modules/sizes/sizes.component';
-import { SizeComponent } from './modules/size/size.component';
-import { MaterialComponent } from './modules/material/material.component';
-// import { InvoiceComponent } from './modules/invoice/invoice.component';
-// import { InventoryListComponent } from './inventory/list/inventory-list.component';
-// import { SidebarComponent } from './sidebar/sidebar.component';
+import { AspectRatioModule } from './modules/aspect-ratio/aspect-ratio.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavHeaderComponent,
-    // SidebarComponent,
     WelcomeComponent,
     PageNotFoundComponent,
-    MessageComponent,
-    SizesComponent,
-    SizeComponent,
-    MaterialComponent
+    MessageComponent
   ],
   imports: [
+    // angular modules
     BrowserModule,
     BootstrapModule,
-    // BrowserAnimationsModule,
-    // MatButtonModule,
-    // MatIconModule,
-    // MatSidenavModule,
     HttpClientModule,
+
+    // feature modules
     InvoiceModule,
     InventoryModule,
     ImageModule,
     LineModule,
     LocationModule,
+    MaterialModule,
+    SizeModule,
+    AspectRatioModule,
     UserModule,
     AppRoutingModule,
   ],

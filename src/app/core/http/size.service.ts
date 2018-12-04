@@ -35,4 +35,9 @@ export class SizeService {
     return this.http.put<any>(url, size, this.common.headers);
   }
 
+  update(size: ISize): Observable<any> {
+    const url = `${this.baseUrl}/${size._id}`;
+    return this.http.put<any>(url, size, this.common.headers);
+  }
+
 }

@@ -98,3 +98,7 @@ h2 {
   color: green;
   font-weight: bold;
 }
+
+.delete-dark-red {
+  color: maroon;
+}

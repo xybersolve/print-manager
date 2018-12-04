@@ -30,13 +30,11 @@ export class LineComponent implements OnInit {
     return this._activeOnly;
   }
   set activeOnly(value: boolean) {
-    console.log(`got activeOnly: ${value}`);
     this._activeOnly = !!value;
     this.filterLines();
   }
 
   private filterLines() {
-    console.log(`filterLines(): ${this._activeOnly}, ${this._lineFilter}`);
     return this.filteredLines = this.lines.filter(line => {
       return this._activeOnly ? line.active === true : true;
     });
@@ -54,7 +52,7 @@ export class LineComponent implements OnInit {
       );
   }
 
-  private updateLine(line) {
+  private update(line) {
     // console.log('Update image'); console.dir(image);
     this.lineService.update(line)
       .subscribe(
@@ -76,13 +74,11 @@ export class LineComponent implements OnInit {
   }
 
   onEdit(line, idx) {
-    console.log(`edit line: ${idx}`);
-    console.dir(line);
     this.router.navigate(['line', line._id]);
   }
 
   onChangeActive(line) {
-    this.updateLine(line);
+    this.update(line);
   }
 
   onSetDefault(line: ILine, idx: number) {
