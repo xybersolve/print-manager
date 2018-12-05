@@ -5,12 +5,11 @@ export class ILine {
   owner: string;
   default: boolean;
   active: true;
-  sortOrder: number;
 }
 
 export class ILineBrief {
   _id?: any;
   name: string;
-  owner?: string;
-  default?: boolean;
+  default: boolean;
+  active: boolean;
 }

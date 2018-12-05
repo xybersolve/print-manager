@@ -28,12 +28,11 @@
                 <th style="min-width:20%;">Size</th>
                 <th>Ratio</th>
                 <th>Volume</th>
-                <th>Owner</th>
+                <!-- <th>Owner</th> -->
                 <th>Active</th>
                 <th class="center-align">
                   Delete
                 </th>
-                <th>Active</th>
               </tr>
             </thead>
             <tbody>
@@ -44,7 +43,7 @@
                 <td (click)="onEdit(size, idx);">{{size.size}}</td>
                 <td (click)="onEdit(size, idx);">{{size.ratio}}</td>
                 <td (click)="onEdit(size, idx);">{{size.volume}}</td>
-                <td (click)="onEdit(size, idx);">{{size.owner}}</td>
+                <!-- <td (click)="onEdit(size, idx);">{{size.owner}}</td> -->
                 <td class="center-align centered">
                   <input [(ngModel)]="size.active" 
                          [ngModelOptions]="{standalone: true}" 
@@ -56,7 +55,6 @@
                     (click)="onRemove(size, idx);">
                     <i class="fa fa-times delete-dark-red" aria-hidden="true"></i>
                 </td>
-                <td>{{size.active}}</td>
               </tr>
             </tbody>
           </table>

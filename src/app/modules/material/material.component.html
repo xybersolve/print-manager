@@ -27,7 +27,7 @@
           <tr>
             <!-- <th style="min-width:10%;">Id</th> -->
             <th style="min-width:20%;">Name</th>
-            <th>Owner</th>
+            <!-- <th>Owner</th> -->
             <th>Default</th>
             <th>Active</th>
             <!--<th class="center-align">Edit</th>-->
@@ -41,9 +41,8 @@
               *ngFor="let material of filteredMaterials; let odd = odd; let even = even; let idx = index;"
               [ngClass]="{odd:odd,even:even}">
 
-            <!-- <td (click)="onEditImage(material, idx);" class="right-align">{{material.id}}</td> -->
             <td (click)="onEdit(material, idx);">{{material.material}}</td>
-            <td (click)="onEdit(material, idx);">{{material.owner}}</td>
+            <!-- <td (click)="onEdit(material, idx);">{{material.owner}}</td> -->
             <td class="text-center">
               <div *ngIf="material.default === undefined || material.default === false">
                 <button class="btn btn-sm btn-outline-secondary"

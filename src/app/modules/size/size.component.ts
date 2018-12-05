@@ -3,7 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { SizeService } from '../../core/http/size.service';
-import { ISize, IAspectRatio } from '../../core/models/size.model';
+import { AspectRatioService } from '../../core/http/aspect-ratio.service';
+
+import { ISize} from '../../core/models/size.model';
+import { IAspectRatio } from '../../core/models/aspect-ratio.model';
 
 @Component({
   // selector: 'pm-size',
@@ -17,7 +20,8 @@ export class SizeComponent implements OnInit {
   _activeOnly: boolean;
 
    constructor(
-    private sizeService: SizeService
+    private sizeService: SizeService,
+    private aspectRatioService: AspectRatioService
   ) { }
 
   ngOnInit() {
@@ -51,8 +55,8 @@ export class SizeComponent implements OnInit {
   }
 
   private getAspectRatios() {
-    this.sizeService
-      .getApectRatios()
+    this.aspectRatioService
+      .getAll()
       .subscribe(
         (data: IAspectRatio[]) => this.aspectRatios = data,
         (err: any) => console.error(err)

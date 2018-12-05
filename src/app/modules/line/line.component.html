@@ -18,27 +18,8 @@
       </button>
     </div>  
   </div> 
-    <!--
-    <div class="col-xs-12" style="margin-bottom:10px;">
-        <input type="text" 
-               class="form-control filter-input" 
-               style="width:80%;display:inline-block;"
-               id="location-filter"
-               [(ngModel)]='locationFilter'
-               placeholder='lighthouse' >
-  
-        <button type="button"
-              class="btn btn-light"  
-              style='display:inline-block;margin-left:4px;height:25px;width:15%;padding-top:0;margin-top:0;' 
-              (click)='onClearLocationFilter()'>
-          
-            <i class="fa fa-times fa-1x"  aria-hidden="true"></i>
-        </button>   
-      </div> 
-    </div>
-    -->
-    <div class="row">
-      <div class="col-xs-12">  
+  <div class="row">
+    <div class="col-xs-12">  
     <!--
     <div>
       {{ lines | json }}
@@ -47,24 +28,12 @@
     <table class="table table-condensed table-hover table-bordered">
       <thead>
         <tr>
-          <th>
-            Name
-          </th>
-          <th>
-            Description
-          </th>
-          <th>
-            Sort Order
-          </th>
-          <th>
-            Default
-          </th>
-          <th>
-            Active
-          </th>
-          <th>
-            Delete
-          </th>
+          <th>Name</th>
+          <th>Description</th>
+          <!-- <th>Sort Order</th> -->
+          <th>Default</th>
+          <th>Active</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -80,11 +49,11 @@
               (click)="onEdit(line, idx);">
             {{line?.description}}
           </td>
-
+          <!--
           <td class="right-align cursor-hand">
             {{line?.sortOrder}}
-          </td>
-
+          </td> 
+          -->
           <td class="text-center">
             <div *ngIf="line.default === undefined || line.default === false">
               <button class="btn btn-sm btn-outline-secondary"

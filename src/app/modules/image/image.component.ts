@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { forkJoin } from 'rxjs';
+// import { Observable } from 'rxjs';
+
 import { ImageService } from '../../core/http/image.service';
+import { LineService } from '../../core/http/line.service';
 
 import { IImage } from '../../core/models/image.model';
+import { ILine, ILineBrief } from '../../core/models/line.model';
+
 
 @Component({
   // selector: 'pm-image',
@@ -13,19 +19,29 @@ import { IImage } from '../../core/models/image.model';
 export class ImageComponent implements OnInit {
   images: IImage[] = [];
   filteredImages: IImage[] = [];
+  lines: ILineBrief[] = [];
   _activeOnly = false;
   _imageFilter = '';
+  _lineFilter = 'All';
+
+  private calls = {
+    image: 0,
+    lines: 1
+  };
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private lineService: LineService
   ) { }
 
   public ngOnInit() {
-    this.getAllImages();
+    // this.getImages();
+    // this.getLines();
+    this.getData();
   }
-
+  // active only filter
   get activeOnly(): boolean {
     return this._activeOnly;
   }
@@ -42,26 +58,60 @@ export class ImageComponent implements OnInit {
     this._imageFilter = value.toLocaleLowerCase();
     this.filterImages();
   }
+  // line filter
+  get lineFilter() {
+    return this._lineFilter;
+  }
+  set lineFilter(value: any) {
+    this._lineFilter = value;
+    this.filterImages();
+  }
 
   private filterImages() {
-    console.log(`filterImages(): ${this._activeOnly}, ${this._imageFilter}`);
     this.filteredImages = this.images.filter(image => {
-      return this._imageFilter ? image.name.toLocaleLowerCase().indexOf(this._imageFilter) !== -1 : true &&
-             this._activeOnly ? image.active === true : true;
+      // to get correct boolean logic, must be broken into separate distinct logical units
+      return ( this._imageFilter ? image.name.toLocaleLowerCase().indexOf(this._imageFilter) !== -1 : true ) &&
+             ( this._lineFilter ? (this._lineFilter === 'All' || image.line === this._lineFilter) : true ) &&
+             ( this._activeOnly ? image.active === true : true );
     });
   }
 
-  private getAllImages() {
-    this.imageService
-      .getAll()
-      .subscribe(
-        (data: IImage[]) => {
-          this.images = data;
-          this.filteredImages = data;
-        },
-        (err) => console.error(err)
-      );
+  private getData() {
+    forkJoin(
+      this.imageService.getAll(),
+      this.lineService.getActiveBrief()
+    ).subscribe(results => {
+        this.images = results[0];
+        this.lines = results[1];
+      },
+      err => console.error(err),
+      () => this.lineFilter = this.lines.find(line => line.default === true).name || 'All'
+    );
   }
+
+  // private getImages() {
+  //   this.imageService
+  //     .getAll()
+  //     .subscribe(
+  //       (data: IImage[]) => {
+  //         this.images = data;
+  //         this.filteredImages = data;
+  //       },
+  //       (err) => console.error(err)
+  //     );
+  // }
+  // private getLines() {
+  //   this.lineService
+  //     .getActiveBrief()
+  //     .subscribe(
+  //       data => this.lines = data,
+  //       err => console.error(err),
+  //       () => {
+  //         // set the line filter after the line have been retrueved
+  //         this.lineFilter = this.lines.find(line => line.default === true).name || 'All';
+  //       }
+  //     );
+  // }
 
   private deleteImage(id: string) {
     console.log('delete image');

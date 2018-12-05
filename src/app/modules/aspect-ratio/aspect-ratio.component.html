@@ -26,7 +26,7 @@
           <tr>
             <!-- <th style="min-width:10%;">Id</th> -->
             <th style="min-width:20%;">Ratio</th>
-            <th>Owner</th>
+            <!-- <th>Owner</th> -->
             <th>Default</th>
             <th>Active</th>
             <!--<th class="center-align">Edit</th>-->
@@ -41,7 +41,7 @@
               [ngClass]="{odd:odd,even:even}">
 
             <td (click)="onEdit(ratio, idx);">{{ratio.ratio}}</td>
-            <td (click)="onEdit(ratio, idx);">{{ratio.owner}}</td>
+            <!-- <td (click)="onEdit(ratio, idx);">{{ratio.owner}}</td> -->
             <td class="text-center">
               <div *ngIf="ratio.default === undefined || ratio.default === false">
                 <button class="btn btn-sm btn-outline-secondary"
