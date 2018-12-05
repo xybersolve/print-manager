@@ -1,10 +1,16 @@
+// angular
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+// 3rd party
+import { forkJoin } from 'rxjs';
+
+// services
 import { SizeService } from '../../core/http/size.service';
 import { AspectRatioService } from '../../core/http/aspect-ratio.service';
 
+// models
 import { ISize} from '../../core/models/size.model';
 import { IAspectRatio } from '../../core/models/aspect-ratio.model';
 
@@ -25,8 +31,7 @@ export class SizeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getAll();
-    this.getAspectRatios();
+    this.getData();
   }
 
   get activeOnly(): boolean {
@@ -42,25 +47,18 @@ export class SizeComponent implements OnInit {
     });
   }
 
-  private getAll() {
-    this.sizeService.getAll()
-      .subscribe(
-        data => {
-          console.dir(data);
-          this.sizes = data;
-          this.filteredSizes = data;
-        },
-        err => console.error(err)
-      );
-  }
-
-  private getAspectRatios() {
-    this.aspectRatioService
-      .getAll()
-      .subscribe(
-        (data: IAspectRatio[]) => this.aspectRatios = data,
-        (err: any) => console.error(err)
-      );
+  private getData() {
+    forkJoin(
+      this.sizeService.getAll(),
+      this.aspectRatioService.getAll()
+    ).subscribe(results => {
+      this.sizes = results[0];
+      this.aspectRatios = results[1];
+    },
+    err => console.error(err),
+    () => {
+      this.filteredSizes = this.sizes;
+    });
   }
 
   private update(size: ISize) {
