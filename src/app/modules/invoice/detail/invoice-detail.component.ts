@@ -1,6 +1,11 @@
+// angular imports
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+// 3rd party imports
+import { forkJoin } from 'rxjs';
+
+// services
 import { CommonService } from '../../../core/services/common.service';
 import { ConfigurationService } from '../../../configs/configuration.service';
 import { ImageService } from '../../../core/http/image.service';
@@ -11,6 +16,7 @@ import { InvoiceService } from '../../../core/http/invoice.service';
 import { ActionService } from '../../../core/http/action.service';
 import { AspectRatioService } from '../../../core/http/aspect-ratio.service';
 
+// models
 import { IImage } from '../../../core/models/image.model';
 import { ISize } from '../../../core/models/size.model';
 import { IAspectRatio } from '../../../core/models/aspect-ratio.model';
@@ -132,79 +138,40 @@ export class InvoiceDetailComponent implements OnInit {
         items: []
       };
     }
-    this.getAllImages();
-    this.getAspectRatios();
-    this.getAllSizes();
-    this.getMaterials();
-    this.getLocations();
-    this.getActions();
+    this.getAttrbuteData();
   }
 
   private getDate() {
     return new Date().toISOString().split('T')[0];
   }
 
-  // calls to data services
-  private getAllImages() {
-    this.imageService
-    .getAll()
-    .subscribe(
-      (data: IImage[]) => {
-        this.images = data;
-        this.filteredImages = data;
+  // get all image & invoice attribute data
+  private getAttrbuteData() {
+    forkJoin(
+      this.imageService.getAll(),
+      this.aspectRatioService.getAll(),
+      this.sizeService.getAll(),
+      this.materialService.getAll(),
+      this.locationService.getAllBrief(),
+      this.actionService.getAll()
+    ).subscribe(
+      results => {
+        this.images = results[0];
+        this.aspectRatios = results[1];
+        this.sizes = results[2];
+        this.materials = results[3];
+        this.locations = results[4];
+        this.actions = results[5];
       },
-      (err: any) => console.error(err)
+      (err => console.error(err)),
+      () => {
+        this.filteredImages = this.images;
+        this.filteredSizes = this.filterSizes(this._selectedAspectRatio);
+      }
     );
   }
 
-  private getAspectRatios() {
-    this.aspectRatioService
-      .getAll()
-      .subscribe(
-        (data: IAspectRatio[]) => this.aspectRatios = data,
-        (err: any) => console.error(err)
-      );
-  }
-
-  private getAllSizes() {
-    this.sizeService
-      .getAll()
-      .subscribe(
-        (data: ISize[]) => {
-          this.sizes = data;
-          this.filteredSizes = this.filterSizes(this._selectedAspectRatio);
-        },
-        (err: any) => console.error(err)
-    );
-  }
-
-  private getMaterials() {
-    this.materialService
-      .getAll()
-      .subscribe(
-        (data: IMaterial[]) => this.materials = data,
-        (err: any) => console.error(err)
-      );
-  }
-
-  private getLocations() {
-    this.locationService
-      .getAllBrief()
-      .subscribe(
-        (data: ILocationBrief[]) => this.locations = data,
-        (err: any) => console.error(err)
-      );
-  }
-
-  private getActions() {
-    this.actionService
-      .getAll()
-      .subscribe(
-        data => this.actions = data,
-        err => console.error(err)
-      );
-  }
-
+  // only called on edit (id is present)
   private getInvoice(id: any) {
     this.invoiceService.get(id)
       .subscribe(
@@ -212,12 +179,13 @@ export class InvoiceDetailComponent implements OnInit {
         err => console.error(err)
       );
   }
-  private removeInvoiceItem(item) {
-    const idx = this.invoice.items.findIndex(i => {
-      return i.size === item.size && i.name === item.name;
-    });
-    this.invoice.items.slice(idx);
-  }
+
+  // private removeInvoiceItem(item) {
+  //   const idx = this.invoice.items.findIndex(i => {
+  //     return i.size === item.size && i.name === item.name;
+  //   });
+  //   this.invoice.items.slice(idx);
+  // }
 
   // clear the image filter
   clearImageFilter() {

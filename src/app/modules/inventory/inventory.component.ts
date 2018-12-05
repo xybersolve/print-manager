@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 // 3rd party imports
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { forkJoin } from 'rxjs';
 
 // service imports
 import { InventoryService } from '../../core/http/inventory.service';
@@ -52,9 +53,10 @@ export class InventoryComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.getInventory();
-    this.getLocations();
-    this.getActions();
+    // this.getInventory();
+    // this.getLocations();
+    // this.getActions();
+    this.getData();
   }
 
   // Filtering routines
@@ -89,6 +91,23 @@ export class InventoryComponent implements OnInit {
   }
 
   // HTTP Rest calls
+  private getData() {
+    forkJoin(
+      this.inventoryService.getAll(),
+      this.locationService.getAllBrief(),
+      this.actionService.getAll()
+    ).subscribe(results => {
+      this.inventory = results[0];
+      this.locations = results[1];
+      this.actions = results[2];
+    },
+    err => console.error(err),
+    () => {
+      // post fetch operations
+      this.filteredInventory = this.filterInventory();
+    });
+  }
+
   private getInventory() {
     this.inventoryService.getAll()
       .subscribe(
@@ -100,21 +119,21 @@ export class InventoryComponent implements OnInit {
       );
   }
 
-  private getLocations() {
-    this.locationService.getAllBrief()
-      .subscribe(
-        data => this.locations = data,
-        err => console.error(err)
-      );
-  }
+  // private getLocations() {
+  //   this.locationService.getAllBrief()
+  //     .subscribe(
+  //       data => this.locations = data,
+  //       err => console.error(err)
+  //     );
+  // }
 
-  private getActions() {
-    this.actionService.getAll()
-      .subscribe(
-        data => this.actions = data,
-        err => console.error(err)
-      );
-  }
+  // private getActions() {
+  //   this.actionService.getAll()
+  //     .subscribe(
+  //       data => this.actions = data,
+  //       err => console.error(err)
+  //     );
+  // }
 
   createInvoice() {
     this.router.navigate(['/invoice', 'add']);

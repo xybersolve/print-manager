@@ -1,13 +1,20 @@
+// angular
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+// 3rd party
+import { forkJoin } from 'rxjs';
+
+// services
 import { InvoiceService } from '../../core/http/invoice.service';
 import { LocationService } from '../../core/http/location.service';
 import { ActionService } from '../../core/http/action.service';
 
+// models
 import { IInvoice } from '../../core/models/invoice.model';
 import { ILocation } from '../../core/models/location.model';
 import { IAction } from '../../core/models/action.model';
+import { _getComponentHostLElementNode } from '@angular/core/src/render3/instructions';
 
 
 @Component({
@@ -34,9 +41,7 @@ export class InvoiceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getLocations();
-    this.getInvoices();
-    this.getActions();
+    this.getData();
   }
 
   // Filtering routines
@@ -72,31 +77,24 @@ export class InvoiceComponent implements OnInit {
     });
   }
 
-
-  // Http REST Routines
-  private getInvoices() {
-    this.invoiceService.getAll()
-      .subscribe(
-        data => {
-          console.dir(data);
-          this.invoices = data;
-          this.filteredInvoices = this.filterInvoices();
-        }
-      );
-  }
-  private getLocations() {
-    this.locationService.getAll()
-      .subscribe(
-        data => this.locations = data,
-        err => console.error(err)
-      );
-  }
-  private getActions() {
-    this.actionService.getAll()
-      .subscribe(
-        data => this.actions = data,
-        err => console.error(err)
-      );
+  // get invoice data and attributes
+  private getData() {
+    forkJoin (
+      this.locationService.getAll(),
+      this.actionService.getAll(),
+      this.invoiceService.getAll()
+    ).subscribe (
+      results => {
+        this.locations = results[0];
+        this.actions = results[1];
+        this.invoices = results[2];
+      },
+      err => console.error(err),
+      () => {
+        // post call processes
+        this.filteredInvoices = this.invoices;
+      }
+    );
   }
 
   // External Event Consumers

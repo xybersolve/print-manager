@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { forkJoin } from 'rxjs';
-// import { Observable } from 'rxjs';
 
 import { ImageService } from '../../core/http/image.service';
 import { LineService } from '../../core/http/line.service';
@@ -88,30 +87,6 @@ export class ImageComponent implements OnInit {
       () => this.lineFilter = this.lines.find(line => line.default === true).name || 'All'
     );
   }
-
-  // private getImages() {
-  //   this.imageService
-  //     .getAll()
-  //     .subscribe(
-  //       (data: IImage[]) => {
-  //         this.images = data;
-  //         this.filteredImages = data;
-  //       },
-  //       (err) => console.error(err)
-  //     );
-  // }
-  // private getLines() {
-  //   this.lineService
-  //     .getActiveBrief()
-  //     .subscribe(
-  //       data => this.lines = data,
-  //       err => console.error(err),
-  //       () => {
-  //         // set the line filter after the line have been retrueved
-  //         this.lineFilter = this.lines.find(line => line.default === true).name || 'All';
-  //       }
-  //     );
-  // }
 
   private deleteImage(id: string) {
     console.log('delete image');
