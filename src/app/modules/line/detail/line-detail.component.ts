@@ -39,7 +39,6 @@ export class LineDetailComponent implements OnInit {
       description: [this.line.description, [ Validators.required, Validators.minLength(5), Validators.maxLength(255) ]],
       owner: {value: this.line.owner || this.common.owner, disabled: true},
       active: this.line.active,
-      sortOrder: [this.line.sortOrder, [Validators.required, Validators.pattern(/\d{1,4}/) ]]
     });
 
     // formgroup & formcontrols style
@@ -48,8 +47,7 @@ export class LineDetailComponent implements OnInit {
       name: new FormControl({value: this.line.name}),
       description: new FormControl({value: this.line.description}),
       owner: new FormControl({value: this.line.owner, disabled: true}),
-      active: new FormControl({value: this.line.active}),
-      sortOrder: new FormControl({value: this.line.sortOrder})
+      active: new FormControl({value: this.line.active})
     });
     */
   }
@@ -64,7 +62,6 @@ export class LineDetailComponent implements OnInit {
       description: this.line.description,
       owner: this.line.owner || this.common.owner,
       active: this.line.active,
-      sortOrder: this.line.sortOrder
     });
   }
 
@@ -86,7 +83,6 @@ export class LineDetailComponent implements OnInit {
           (err) => console.error(err)
         );
     } else {
-      // console.log('imageDetail.updateImate()'); console.dir(image);
       this.lineService.update(line)
         .subscribe(
           data => console.log(data),

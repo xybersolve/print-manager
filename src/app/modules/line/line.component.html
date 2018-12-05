@@ -20,17 +20,11 @@
   </div> 
   <div class="row">
     <div class="col-xs-12">  
-    <!--
-    <div>
-      {{ lines | json }}
-    </div>
-    -->
     <table class="table table-condensed table-hover table-bordered">
       <thead>
         <tr>
           <th>Name</th>
           <th>Description</th>
-          <!-- <th>Sort Order</th> -->
           <th>Default</th>
           <th>Active</th>
           <th>Delete</th>
@@ -49,11 +43,7 @@
               (click)="onEdit(line, idx);">
             {{line?.description}}
           </td>
-          <!--
-          <td class="right-align cursor-hand">
-            {{line?.sortOrder}}
-          </td> 
-          -->
+      
           <td class="text-center">
             <div *ngIf="line.default === undefined || line.default === false">
               <button class="btn btn-sm btn-outline-secondary"

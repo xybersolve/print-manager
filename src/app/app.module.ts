@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // root level components
 import { AppComponent } from './app.component';
@@ -24,6 +24,8 @@ import { MaterialModule } from './modules/material/material.module';
 import { MessageComponent } from './modules/message/message.component';
 import { AspectRatioModule } from './modules/aspect-ratio/aspect-ratio.module';
 
+// services & interceptors
+import { HttpCacheInterceptor } from './core/http/http-cache-interceptor';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { AspectRatioModule } from './modules/aspect-ratio/aspect-ratio.module';
     AppRoutingModule,
   ],
   exports: [ ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: HttpCacheInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 

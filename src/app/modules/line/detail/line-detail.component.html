@@ -51,25 +51,6 @@
       </div>
     </div>  
 
-    <div class="row">
-      <div class="col-xs-12">
-        <label for="sortOrder">Sort Order:</label>&nbsp;&nbsp;
-        <input type="number"
-               step="10" 
-               class="form-control" 
-               name="sortOrder" 
-               id="sortOrder" 
-               placeholder="25"
-               formControlName="sortOrder">
-          <div *ngIf="lineForm.get('sortOrder').invalid && (lineForm.get('sortOrder').dirty || lineForm.get('sortOrder').touched)"
-               class="alert alert-danger">
-           <div *ngIf="lineForm.get('sortOrder').errors.required">Line 'sortOrder' is required</div>
-           <div *ngIf="lineForm.get('sortOrder').errors.pattern">Line 'sortOrder' must be a a number.</div>
-           
-         </div>       
-      </div>
-    </div>
-    
     <div class="row" style="margin-top:10px;">
       <div class="col-xs-12">
         <label for="active">Active:</label>&nbsp;&nbsp;
