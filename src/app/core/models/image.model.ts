@@ -4,7 +4,7 @@ export class IImage {
   fileStub: string;
   line: string;
   name: string;
-  owner = 'Greg Milligan'; // default owner for now
+  owner: string; // default owner for now
   tags?: string[];
 }
 
