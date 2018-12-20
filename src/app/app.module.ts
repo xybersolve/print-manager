@@ -21,8 +21,11 @@ import { LineModule } from './modules/line/line.module';
 import { LocationModule } from './modules/location/location.module';
 import { SizeModule } from './modules/size/size.module';
 import { MaterialModule } from './modules/material/material.module';
-import { MessageComponent } from './modules/message/message.component';
 import { AspectRatioModule } from './modules/aspect-ratio/aspect-ratio.module';
+
+// components
+import { LoginComponent } from './modules/user/login.component';
+import { MessageComponent } from './modules/message/message.component';
 
 // services & interceptors
 import { HttpCacheInterceptor } from './core/http/http-cache-interceptor';
