@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // root level components
 import { AppComponent } from './app.component';
@@ -43,6 +44,7 @@ import { HttpCacheInterceptor } from './core/http/http-cache-interceptor';
     BrowserModule,
     BootstrapModule,
     HttpClientModule,
+    BrowserAnimationsModule,
 
     // feature modules
     InvoiceModule,

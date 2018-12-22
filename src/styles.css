@@ -102,3 +102,13 @@ h2 {
 .delete-dark-red {
   color: maroon;
 }
+
+.dropdown-menu .nav-link {
+  background-color: #f5f5f5;
+  border: 1px #f5f5f5 solid;
+}
+.dropdown-menu .nav-link.active {
+  background-color: white;
+  border: 1px #ddd solid;
+  border-radius: 8px;
+}

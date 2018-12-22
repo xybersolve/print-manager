@@ -32,7 +32,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [ // fires up router service here (only)
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { enableTracing: true })
   ],
   exports: [
     RouterModule

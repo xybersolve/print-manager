@@ -1,7 +1,7 @@
 
-<nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-light bg-light mb-0 pb-0">
     <a class="navbar-brand" href="#">Print Manager</a>
-    <ul class="navbar-nav text-uppercase ml-auto">
+    <ul class="nav nav-tabs navbar-nav text-uppercase ml-auto mb-0 pb-0">
       <li class="nav-item active">
           <a class='nav-link navbar-item' [routerLink]="['/inventory']" routerLinkActive='active'>Inventory</a>
       </li>
@@ -11,14 +11,15 @@
       <li class="nav-item">
           <a class='nav-link' [routerLink]="['/image']" routerLinkActive='active'>Images</a>
       </li>
-      <li class="dropdown" dropdown>
+      <li class="dropdown mr-4" dropdown>
         <div class="btn-group" dropdown>
           <button id="button-config" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
                   aria-controls="dropdown-config">
                 Attributes <span class="caret"></span>
           </button>
           <ul id="dropdown-config" 
-              *dropdownMenu class="dropdown-menu"
+              class="dropdown-menu nav-pills"
+              *dropdownMenu 
               role="menu" 
               aria-labelledby="button-config">
             <li role="menuitem">
@@ -38,19 +39,6 @@
             </li>
           </ul>
         </div>
-        <!--
-        <a dropdownToggle role="button">
-          Attributes <span class="caret"></span>
-        </a>
-        <ul *dropdownMenu class="dropdown-menu">
-          <li>
-            <a href="#">Lines</a>
-          </li>
-          <li>
-            <a href="#">Locations</a>
-          </li>
-        </ul>
-      -->
       </li>
     </ul>
   </nav>

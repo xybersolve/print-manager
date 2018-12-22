@@ -1,16 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<span class="fa fa-spinner spinner"
+      *ngIf='isLoading'>
+</span>
+
 <div>
   <pm-nav-header></pm-nav-header>
 
   <div class="container">
     <div class="row">
-      <div class="col-md-10">
-        <router-outlet></router-outlet>
+      <div class="col-md-10"
+           [@slideInAnimation]="outlet.isActivated ? outlet.activatedRoute : ''">
+        <router-outlet #outlet="outlet"></router-outlet>
       </div>
       <div class="col-md-2">
         <router-outlet name="popup"></router-outlet>
       </div>
     </div>
   </div>
-  
 </div>

@@ -12,7 +12,9 @@
     [ngClass]="{'is-invalid': name.touched && !name.valid }"
   -->
   <!-- <form (ngSubmit)="onSubmit(imageDetailForm);" #imageDetailForm="ngForm"> -->
-  <form (ngSubmit)="onSubmit(this.image, imageDetailForm);" #imageDetailForm="ngForm">  
+  <form class="form-horizontal"
+        (ngSubmit)="onSubmit(this.image, imageDetailForm);" 
+        #imageDetailForm="ngForm">  
     <div class="row form-group">
       <div class="col-xs-12">
         <label for="name">Name:</label>&nbsp;
