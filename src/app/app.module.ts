@@ -23,10 +23,11 @@ import { LocationModule } from './modules/location/location.module';
 import { SizeModule } from './modules/size/size.module';
 import { MaterialModule } from './modules/material/material.module';
 import { AspectRatioModule } from './modules/aspect-ratio/aspect-ratio.module';
+import { MessageModule } from './modules/message/message.module';
 
 // components
 import { LoginComponent } from './modules/user/login.component';
-import { MessageComponent } from './modules/message/message.component';
+// import { MessageComponent } from './modules/message/message.component';
 
 // services & interceptors
 import { HttpCacheInterceptor } from './core/http/http-cache-interceptor';
@@ -36,8 +37,8 @@ import { HttpCacheInterceptor } from './core/http/http-cache-interceptor';
     AppComponent,
     NavHeaderComponent,
     WelcomeComponent,
-    PageNotFoundComponent,
-    MessageComponent
+    PageNotFoundComponent
+    // MessageComponent
   ],
   imports: [
     // angular modules
@@ -56,7 +57,8 @@ import { HttpCacheInterceptor } from './core/http/http-cache-interceptor';
     SizeModule,
     AspectRatioModule,
     UserModule,
-    AppRoutingModule,
+    MessageModule,
+    AppRoutingModule
   ],
   exports: [ ],
   providers: [

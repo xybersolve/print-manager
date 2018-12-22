@@ -9,10 +9,7 @@ const routes: Routes = [
     path: 'line',
     component: LineComponent
   }, {
-    path: 'line/add',
-    component: LineDetailComponent
-  }, {
-    path: 'line/:id',
+    path: 'line/:id/edit',
     component: LineDetailComponent
   }
 ];

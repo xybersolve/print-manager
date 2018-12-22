@@ -99,11 +99,11 @@ export class InvoiceComponent implements OnInit {
 
   // External Event Consumers
   onAdd() {
-    this.router.navigate(['/invoice', 'add']);
+    this.router.navigate(['/invoice', 0, 'edit']);
   }
 
   onEdit(invoice: IInvoice) {
-    this.router.navigate(['/invoice', invoice._id]);
+    this.router.navigate(['/invoice', invoice._id, 'edit']);
   }
 
   onRemove(invoice, idx) {

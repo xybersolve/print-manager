@@ -18,6 +18,7 @@ export class AppComponent {
       this.handleRouterEvent(routerEvent);
     });
   }
+
   handleRouterEvent(routerEvent: Event): void {
     if (routerEvent instanceof NavigationStart) {
       this.isLoading = true;
@@ -29,13 +30,5 @@ export class AppComponent {
         }
   }
 
-  displayMessages(): void {
-    this.router.navigate([{ outlets: { popup: ['messages']}}]);
-  }
-
-  hideMessages(): void {
-    this.router.navigate([{outlets: { popup: null}}]);
-    this.messageService.isDisplayed = false;
-  }
 }
 

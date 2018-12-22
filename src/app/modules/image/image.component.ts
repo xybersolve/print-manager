@@ -120,16 +120,11 @@ export class ImageComponent implements OnInit {
       );
   }
 
-  public onClearImageFilter() {
+  onClearImageFilter() {
     this.imageFilter = '';
   }
 
-  public onEditImage(image, idx) {
-    // console.log(`edit - _id: ${image._id}, id: ${image.id}, idx: ${idx}`);
-    this.router.navigate(['/image', image._id ]);
-  }
-
-  public onRemoveImage(image, idx) {
+  onRemoveImage(image, idx) {
     const response = confirm(`Are you sure you want to delete: ${image.name}`);
     if (response === true) {
       this.deleteImage(image._id);
@@ -139,14 +134,19 @@ export class ImageComponent implements OnInit {
     // console.log(`response: ${response}`);
   }
 
-  public onChangeActive(image) {
+  onChangeActive(image) {
     // console.log('got onChangeActive()');
     this.updateImage(image);
   }
 
-  public onAddImage() {
+  onEditImage(image, idx) {
+    // console.log(`edit - _id: ${image._id}, id: ${image.id}, idx: ${idx}`);
+    this.router.navigate(['/image', image._id, 'edit' ]);
+  }
+
+  onAddImage() {
     // console.log('got onAddImage();');
-    this.router.navigate(['/image', 'add']);
+    this.router.navigate(['/image', '0', 'edit']);
   }
 
 }

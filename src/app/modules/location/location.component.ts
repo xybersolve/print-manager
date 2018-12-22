@@ -59,10 +59,6 @@ export class LocationComponent implements OnInit {
     );
   }
 
-  onAdd() {
-    this.router.navigate(['location', 'add']);
-  }
-
   onRemove(location: ILocation, idx: number) {
     console.log('onRemove');
     this.deleteLocation(location);
@@ -79,10 +75,13 @@ export class LocationComponent implements OnInit {
     this.update(location);
   }
 
+  onAdd() {
+    this.router.navigate(['location', '0', 'edit']);
+  }
 
   onEdit(location: ILocation) {
     console.log('onEdit');
-    this.router.navigate(['location', location._id]);
+    this.router.navigate(['location', location._id, 'edit']);
   }
 
 }

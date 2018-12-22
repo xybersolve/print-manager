@@ -84,8 +84,8 @@ export class LocationDetailComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.title = id ? 'Location Edit' : 'Location Add';
-    if (id) {
+    this.title = id !== '0' ? 'Location Edit' : 'Location Add';
+    if (id !== '0') {
       this.getLocation(id);
     }
 

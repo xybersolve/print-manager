@@ -124,10 +124,7 @@ export class InvoiceDetailComponent implements OnInit {
   ngOnInit() {
     // instantiate invoice whether edit (with id) or new
     const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.title = 'Invoice Edit';
-      this.getInvoice(id);
-    } else {
+    if (id === '0') {
       this.title = 'Invoice Add';
       this.invoice = {
         _id: undefined,
@@ -137,6 +134,9 @@ export class InvoiceDetailComponent implements OnInit {
         action: this.selectedAction,
         items: []
       };
+    } else {
+      this.title = 'Invoice Edit';
+      this.getInvoice(id);
     }
     this.getAttrbuteData();
   }

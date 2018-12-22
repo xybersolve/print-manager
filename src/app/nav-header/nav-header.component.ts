@@ -15,17 +15,22 @@ export class NavHeaderComponent {
               private messageService: MessageService,
               private router: Router) { }
 
+  get isMessageDisplayed(): boolean {
+    return this.messageService.isDisplayed;
+  }
+
   logOut(): void {
     this.authService.logout();
     this.router.navigate(['/welcome']);
   }
 
   displayMessages(): void {
-    this.router.navigate([{ outlets: { popup: ['messages']}}]);
+    this.router.navigate([{ outlets: { 'topbar': ['messages']}}]);
+    this.messageService.isDisplayed = true;
   }
 
   hideMessages(): void {
-    this.router.navigate([{outlets: { popup: null}}]);
+    this.router.navigate([{outlets: { 'topbar': null}}]);
     this.messageService.isDisplayed = false;
   }
 }

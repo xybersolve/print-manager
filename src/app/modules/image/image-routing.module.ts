@@ -9,10 +9,7 @@ const routes: Routes = [
     path: 'image', // image list
     component: ImageComponent
   }, {
-    path: 'image/add',  // image add
-    component: ImageDetailComponent
-  }, {
-    path: 'image/:id',  // image edit
+    path: 'image/:id/edit',  // image edit or add
     component: ImageDetailComponent
   }
 

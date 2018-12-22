@@ -1,14 +1,32 @@
+<!--
+<div class="card">
+  <div class="card-header">
+      Messages
+      <button class="btn btn-light btn-sm float-right"
+              (click)="close()">
+        X   
+      </button>
+
+  </div>
+  <div class="card-body"> 
+    <div *ngFor="let message of messageService.messages; let i=index">
+      <div *ngIf="i<8" class="message-row alert alert-info">
+          {{ message }}
+      </div>
+    </div>
+  </div>
+</div>  
+-->
+<!--
+  Smaller message profile
+-->
 <div class="row">
-  <h4 class="col-md-10">Message Log</h4>
-  <span class="col-md-2">
-      <a class="btn btn-default"
-          (click)="close()">
-          x
-      </a>
-  </span>
-</div>
-<div *ngFor="let message of messageService.messages; let i=index">
-  <div *ngIf="i<8" class="message-row">
-      {{ message }}
+  <div class="offset-2 col-md-8">
+    <div *ngFor="let message of messageService.messages; let i=index">
+      <div *ngIf="i<8" class="message-row alert alert-info"
+           (click)="remove(i)">
+          {{ message }}
+      </div>
+    </div>
   </div>
 </div>

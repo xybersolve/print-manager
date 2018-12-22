@@ -40,6 +40,22 @@
           </ul>
         </div>
       </li>
+
+      <li class="nav-item"
+          *ngIf="! isMessageDisplayed">
+          <a class='nav-link' 
+             (click)="displayMessages();">
+            Show Messages
+          </a>
+      </li>
+      <li class="nav-item"
+          *ngIf="isMessageDisplayed">
+          <a class='nav-link' 
+             (click)="hideMessages();">
+            Hide Messages 
+          </a>
+      </li>
+
     </ul>
   </nav>
 

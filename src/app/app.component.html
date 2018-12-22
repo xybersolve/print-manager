@@ -8,12 +8,17 @@
 
   <div class="container">
     <div class="row">
+      <div class="col-md-12">
+          <router-outlet name="topbar"></router-outlet>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-10"
            [@slideInAnimation]="outlet.isActivated ? outlet.activatedRoute : ''">
         <router-outlet #outlet="outlet"></router-outlet>
       </div>
       <div class="col-md-2">
-        <router-outlet name="popup"></router-outlet>
+          <router-outlet name="sidebar"></router-outlet>
       </div>
     </div>
   </div>

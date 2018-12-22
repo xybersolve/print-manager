@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { LineService } from '../../core/http/line.service';
 import { ILine } from '../../core/models/line.model';
+import { MessageService } from '../../modules/message/message.service';
 
 @Component({
   // selector: 'pm-line',
@@ -19,7 +20,8 @@ export class LineComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private lineService: LineService
+    private lineService: LineService,
+    private mesageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -70,11 +72,12 @@ export class LineComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['line', 'add']);
+    this.router.navigate(['line',  '0', 'edit']);
+    // this.mesageService.addMessage('Went to Add Line');
   }
 
   onEdit(line, idx) {
-    this.router.navigate(['line', line._id]);
+    this.router.navigate(['line', line._id, 'edit']);
   }
 
   onChangeActive(line) {

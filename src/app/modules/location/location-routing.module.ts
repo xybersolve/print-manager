@@ -13,10 +13,7 @@ const routes: Routes = [
     path: 'location',
     component: LocationComponent
   }, {
-    path: 'location/add',
-    component: LocationDetailComponent
-  }, {
-    path: 'location/:id',
+    path: 'location/:id/edit',
     component: LocationDetailComponent
   }
 ];

@@ -28,8 +28,8 @@ export class LineDetailComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.title = id ? 'Line Edit' : 'Line Add';
-    if (id) {
+    this.title = id === '0' ? 'Line Add' : 'Line Edit';
+    if (id !== '0') {
       this.getLine(id);
     }
     // Form definitions

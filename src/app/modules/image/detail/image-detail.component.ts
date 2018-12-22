@@ -30,8 +30,8 @@ export class ImageDetailComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.title = id ? 'Image Edit' : 'Image Add';
-    if (id) {
+    this.title = id !== '0' ? 'Image Edit' : 'Image Add';
+    if (id !== '0') {
       this.getImage(id);
     }
     this.getLines();
