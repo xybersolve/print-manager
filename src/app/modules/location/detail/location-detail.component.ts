@@ -7,6 +7,7 @@ import { CommonService } from '../../../core/services/common.service';
 import { LocationService } from '../../../core/http/location.service';
 import { ILocation } from '../../../core/models/location.model';
 import { ErrorMessanger } from '../../../core/services/error-messanger';
+import { MessageService } from '../../message/message.service';
 
 // custom validation rule - placeholder for future usage
 // return null if valid, {key:value} pair - if not valid
@@ -50,6 +51,7 @@ export class LocationDetailComponent implements OnInit {
   constructor(
     private common: CommonService,
     private locationService: LocationService,
+    private messageService: MessageService,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
@@ -173,14 +175,16 @@ export class LocationDetailComponent implements OnInit {
         .add(location)
         .subscribe(
           (data) => this.location = data,
-          (err) => console.error(err)
+          (err) => console.error(err),
+          () => this.onSaveComplete(`Location added: ${location.name}`)
         );
     } else {
       // console.log('imageDetail.updateImate()'); console.dir(image);
       this.locationService.update(location)
         .subscribe(
           data => console.log(data),
-          err => console.error(err)
+          err => console.error(err),
+          () => this.onSaveComplete(`Location updated: ${location.name}`)
         );
     }
     // back to lines list
@@ -211,8 +215,12 @@ export class LocationDetailComponent implements OnInit {
     email.updateValueAndValidity();
   }
 
-  public onSubmit(location: ILocation) {
+  onSubmit(location: ILocation) {
     console.log('onSubmit()');
     this.update(location);
+  }
+
+  private onSaveComplete(msg: string) {
+    this.messageService.addMessage(msg);
   }
 }

@@ -35,10 +35,17 @@ export class ImageComponent implements OnInit {
     private lineService: LineService
   ) { }
 
-  public ngOnInit() {
-    // this.getImages();
-    // this.getLines();
+  ngOnInit() {
     this.getData();
+    // this.route.queryParamMap.subscribe(
+    //   (paramMap) => {
+    //     console.dir(paramMap);
+    //     this.activeOnly = !! paramMap.get('active');
+    //     this.imageFilter = paramMap.get('name') || '';
+    //     this.lineFilter = paramMap.get('line') || '';
+    //     console.log(this.imageFilter);
+    //   }
+    // );
   }
   // active only filter
   get activeOnly(): boolean {
@@ -89,7 +96,6 @@ export class ImageComponent implements OnInit {
   }
 
   private deleteImage(id: string) {
-    console.log('delete image');
     this.imageService
         .delete(id)
         .subscribe(
@@ -112,7 +118,6 @@ export class ImageComponent implements OnInit {
   }
 
   private updateImage(image) {
-    // console.log('Update image'); console.dir(image);
     this.imageService.update(image)
       .subscribe(
         (data) => console.log(data),
@@ -131,22 +136,32 @@ export class ImageComponent implements OnInit {
       this.images.splice(idx, 1);
       this.filterImages(); // update the fitlered images
     }
-    // console.log(`response: ${response}`);
-  }
+   }
 
   onChangeActive(image) {
-    // console.log('got onChangeActive()');
     this.updateImage(image);
   }
 
   onEditImage(image, idx) {
-    // console.log(`edit - _id: ${image._id}, id: ${image.id}, idx: ${idx}`);
-    this.router.navigate(['/image', image._id, 'edit' ]);
+    this.router.navigate(
+      ['/image', image._id, 'edit' ],
+      {queryParams: {
+        imageFilter: this.imageFilter,
+        lineFilter: this.lineFilter,
+        activeOnly: this.activeOnly
+      }}
+    );
   }
 
   onAddImage() {
-    // console.log('got onAddImage();');
-    this.router.navigate(['/image', '0', 'edit']);
+    this.router.navigate(
+      ['/image', '0', 'edit'],
+      {queryParams: {
+        imageFilter: this.imageFilter,
+        lineFilter: this.lineFilter,
+        activeOnly: this.activeOnly
+      }}
+    );
   }
 
 }

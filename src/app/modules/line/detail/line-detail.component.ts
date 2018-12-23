@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonService } from '../../../core/services/common.service';
 import { ILine } from '../../../core/models/line.model';
 import { LineService } from '../../../core/http/line.service';
+import { MessageService } from '../../message/message.service';
 
 @Component({
   // selector: 'pm-line-detail',
@@ -23,7 +24,8 @@ export class LineDetailComponent implements OnInit {
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private lineService: LineService,
-              private common: CommonService
+              private common: CommonService,
+              private messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -80,13 +82,15 @@ export class LineDetailComponent implements OnInit {
       this.lineService.add(line)
         .subscribe(
           (data) => this.line = data,
-          (err) => console.error(err)
+          (err) => console.error(err),
+          () => this.onSaveComplete(`Line added: ${line.name}`)
         );
     } else {
       this.lineService.update(line)
         .subscribe(
           data => console.log(data),
-          err => console.error(err)
+          err => console.error(err),
+          () => this.onSaveComplete(`Line updated: ${line.name}`)
         );
     }
     // back to lines list
@@ -97,5 +101,9 @@ export class LineDetailComponent implements OnInit {
     console.log('onSubmit()');
     console.dir(line);
     this.updateLine(line);
+  }
+
+  private onSaveComplete(msg: string) {
+    this.messageService.addMessage(msg);
   }
 }

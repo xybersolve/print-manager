@@ -7,6 +7,7 @@ import { LineService } from '../../../core/http/line.service';
 
 import { IImage } from '../../../core/models/image.model';
 import { ILine, ILineBrief } from '../../../core/models/line.model';
+import { MessageService } from '../../message/message.service';
 
 
 @Component({
@@ -25,11 +26,17 @@ export class ImageDetailComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private imageService: ImageService,
-              private lineService: LineService
+              private lineService: LineService,
+              private messageService: MessageService
   ) {}
 
   ngOnInit() {
+    // this.route.paramMap.subscribe(
+    //   params => console.log(`observed param: ${params.get('id')}`)
+    // );
+
     const id = this.route.snapshot.paramMap.get('id');
+
     this.title = id !== '0' ? 'Image Edit' : 'Image Add';
     if (id !== '0') {
       this.getImage(id);
@@ -58,14 +65,16 @@ export class ImageDetailComponent implements OnInit {
       this.imageService.add(image)
         .subscribe(
           (data) => this.image = data,
-          (err) => console.error(err)
+          (err) => console.error(err),
+          () => this.onSaveComplete(`Image saved: ${image.title}`)
         );
     } else {
       // console.log('imageDetail.updateImate()'); console.dir(image);
       this.imageService.update(image)
         .subscribe(
           data => console.log(data),
-          err => console.error(err)
+          err => console.error(err),
+          () => this.onSaveComplete(`Image update: ${image.title}`)
         );
     }
     // back to image list
@@ -80,5 +89,9 @@ export class ImageDetailComponent implements OnInit {
     const image = <IImage>formImage;
     console.log(image);
     this.updateImage(image);
+  }
+
+  onSaveComplete(msg: string) {
+    this.messageService.addMessage(msg);
   }
 }

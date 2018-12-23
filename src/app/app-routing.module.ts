@@ -31,7 +31,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ 
+  imports: [
     RouterModule.forRoot(routes, { enableTracing: false })
   ],
   exports: [

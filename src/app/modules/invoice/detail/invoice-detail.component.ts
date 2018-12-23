@@ -15,6 +15,7 @@ import { LocationService } from '../../../core/http/location.service';
 import { InvoiceService } from '../../../core/http/invoice.service';
 import { ActionService } from '../../../core/http/action.service';
 import { AspectRatioService } from '../../../core/http/aspect-ratio.service';
+import { MessageService } from '../../message/message.service';
 
 // models
 import { IImage } from '../../../core/models/image.model';
@@ -24,6 +25,7 @@ import { IMaterial } from '../../../core/models/material.model';
 import { ILocation, ILocationBrief } from '../../../core/models/location.model';
 import { IInvoice, IInvoiceItem } from '../../../core/models/invoice.model';
 import { IAction } from '../../../core/models/action.model';
+
 
 @Component({
   selector: 'pm-invoice',
@@ -59,7 +61,8 @@ export class InvoiceDetailComponent implements OnInit {
     private materialService: MaterialService,
     private locationService: LocationService,
     private invoiceService: InvoiceService,
-    private actionService: ActionService
+    private actionService: ActionService,
+    private messageService: MessageService
   ) {}
 
   // size filter from aspect ratios
@@ -265,10 +268,23 @@ export class InvoiceDetailComponent implements OnInit {
     // _id means we are editing exisiting record,
     // otherwise we are saving a new item
     if (this.invoice._id) {
-      this.invoiceService.update(this.invoice).subscribe(() => {});
+      this.invoiceService.update(this.invoice).subscribe(
+        () => {},
+        err => console.error(err),
+        () => this.onSaveComplete(`Invoice updated, for: ${this.invoice.location}`)
+      );
     } else {
       // this.invoice.date = new Date().toString();
-      this.invoiceService.add(this.invoice).subscribe(() => {});
+      this.invoiceService.add(this.invoice).subscribe(
+        () => {},
+        err => console.error(err),
+        () => this.onSaveComplete(`Invoice added, for: ${this.invoice.location}`)
+      );
     }
   }
+
+  private onSaveComplete(msg: string) {
+    this.messageService.addMessage(msg);
+  }
+
 }
